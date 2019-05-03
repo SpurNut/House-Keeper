@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/tasks"
+        android:icon="@drawable/ic_business_center_black_24dp"
+        android:title="tasks"
+        />
+
+    <item android:id="@+id/overview"
+        android:icon="@drawable/ic_business_black_24dp"
+        android:title="overview"
+        />
+
+
+</menu>
