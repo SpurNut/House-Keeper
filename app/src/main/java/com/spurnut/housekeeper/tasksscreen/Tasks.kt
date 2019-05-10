@@ -21,18 +21,63 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
 import com.spurnut.housekeeper.R
+import java.util.*
+
 
 /**
  * Shows the main title screen with a button that navigates to [About].
  */
 class Tasks : Fragment() {
+
+    private lateinit var recyclerView: RecyclerView
+
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
+
         val view = inflater.inflate(R.layout.fragment_tasks, container, false)
+
+        val viewAdapter = MyAdapter(listOf("Ah", "Beh", "Ceh"))
+
+        recyclerView = view.findViewById<RecyclerView>(R.id.my_recycler_view).apply {
+            setHasFixedSize(true)
+            adapter = viewAdapter
+        }
+
+        // Extend the Callback class
+        class _ithCallback() : ItemTouchHelper.Callback() {
+            //and in your imlpementaion of
+            override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
+                // get the viewHolder's and target's positions in your adapter data, swap them
+                Collections.swap(viewAdapter.getItems(), viewHolder.getAdapterPosition(), target.getAdapterPosition())
+                // and notify the adapter that its dataset has changed
+                viewAdapter.notifyItemMoved(viewHolder.getAdapterPosition(), target.getAdapterPosition());
+                return true;
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int): Unit {
+                println("swiped")
+            }
+
+            //defines the enabled move directions in each state (idle, swiping, dragging).
+
+            override fun getMovementFlags(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder): Int {
+                return makeFlag(androidx.recyclerview.widget.ItemTouchHelper.ACTION_STATE_DRAG,
+                        androidx.recyclerview.widget.ItemTouchHelper.DOWN or ItemTouchHelper.UP or ItemTouchHelper.START or ItemTouchHelper.END)
+            }
+        }
+
+        // Create an `ItemTouchHelper` and attach it to the `RecyclerView`
+        val itemTouchHelper = ItemTouchHelper(_ithCallback())
+        itemTouchHelper.attachToRecyclerView(recyclerView)
+
 
 
         return view
     }
+
+
 }

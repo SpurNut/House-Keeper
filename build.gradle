@@ -19,11 +19,7 @@ buildscript {
 }
 
 allprojects {
-    repositories {
-        google()
-        jcenter()
-
-    }
+    addRepos(repositories)
 }
 
 task clean(type: Delete) {
