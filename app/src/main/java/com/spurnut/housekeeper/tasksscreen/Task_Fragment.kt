@@ -24,13 +24,16 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.spurnut.housekeeper.R
+import com.spurnut.housekeeper.model.Task
+import com.spurnut.housekeeper.model.URGENCY_IMPORTANCE_QUADRANT
+import java.text.DateFormat
 import java.util.*
 
 
 /**
  * Shows the main title screen with a button that navigates to [About].
  */
-class Tasks : Fragment() {
+class Task_Fragment : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
 
@@ -40,7 +43,23 @@ class Tasks : Fragment() {
 
         val view = inflater.inflate(R.layout.fragment_tasks, container, false)
 
-        val viewAdapter = MyAdapter(listOf("Ah", "Beh", "Ceh"))
+        val tasks = listOf<Task>(Task(title = "# Fenster reparieren\n " +
+                "* und danach leckeres\n " +
+                "* Essen kochen und dann noch laufen und Einkaufen",
+                urgency = URGENCY_IMPORTANCE_QUADRANT.URGENT_IMPORTANT,
+                description = "Fenster hat abgeblätterte Farbe.", dueDate = Date(), images = null),
+                Task(title = "Nicht so viel Text",
+                urgency = URGENCY_IMPORTANCE_QUADRANT.URGENT_IMPORTANT,
+                description = "Fenster hat abgeblätterte Farbe.", dueDate = null, images = null),
+                Task(title = "Nicht so viel Text",
+                        urgency = URGENCY_IMPORTANCE_QUADRANT.URGENT_IMPORTANT,
+                        description = "Fenster hat abgeblätterte Farbe.", dueDate = Date(), images = null),
+                Task(title = "Nicht so viel Text",
+                        urgency = URGENCY_IMPORTANCE_QUADRANT.URGENT_IMPORTANT,
+                        description = "Fenster hat abgeblätterte Farbe.", dueDate = Date(), images = null))
+
+
+        val viewAdapter = MyAdapter(tasks)
 
         recyclerView = view.findViewById<RecyclerView>(R.id.my_recycler_view).apply {
             setHasFixedSize(true)

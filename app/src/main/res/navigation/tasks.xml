@@ -24,7 +24,7 @@
 
     <fragment
             android:id="@+id/tasks_1"
-            android:name="com.spurnut.housekeeper.tasksscreen.Tasks"
+            android:name="com.spurnut.housekeeper.tasksscreen.Task_Fragment"
             android:label="@string/tasks"
             tools:layout="@layout/fragment_tasks">
         <!--<action-->
