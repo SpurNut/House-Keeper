@@ -8,6 +8,8 @@
     <View
         android:id="@+id/divider_top"
         android:layout_width="match_parent"
+        android:layout_marginLeft="18dp"
+        android:layout_marginRight="18dp"
         android:layout_height="1dp"
         android:background="?android:attr/listDivider" />
 
@@ -15,7 +17,7 @@
         android:id="@+id/task_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
+        android:layout_margin="18dp"
         android:textSize="21sp"
         android:textStyle="bold" />
 
@@ -24,7 +26,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/task_title"
-        android:paddingLeft="5dp"
+        android:paddingLeft="18dp"
         android:text="@string/important_urgent"
         android:textColor="@android:color/holo_red_dark"
         android:textSize="12sp"
@@ -46,7 +48,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/task_urgency"
-        android:layout_margin="5dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginLeft="18dp"
+        android:layout_marginRight="18dp"
+        android:layout_marginBottom="4dp"
         android:text="Das ist eine Beispiel Beschreibung. Wir sollten also darauf achten wie sich das ganze verhält. BLABLALBLALABL.
         Das ist eine Beispiel Beschreibung. Wir sollten also darauf achten wie sich das ganze verhält. BLABLALBLALABL
         Das ist eine Beispiel Beschreibung. Wir sollten also darauf achten wie sich das ganze verhält. BLABLALBLALABL"
@@ -54,13 +59,34 @@
 
         android:textSize="14sp" />
 
+    <ToggleButton
+        android:id="@+id/showMoreToggle"
+        android:minHeight="0dp"
+        android:minWidth="0dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/task_description"
+        android:layout_alignEnd="@+id/task_description"
+        android:onClick="onClick"
+        android:background="?android:attr/selectableItemBackground"
+        android:textColor="@color/colorPrimary"
+        android:textOff="More"
+        android:textOn="Less"
+        android:visibility="gone"
+        android:layout_marginLeft="18dp"
+        />
+
     <View
         android:id="@+id/divider_bottom"
         android:layout_width="match_parent"
+        android:layout_marginLeft="18dp"
+        android:layout_marginRight="18dp"
         android:layout_height="1dp"
-        android:layout_below="@+id/task_description"
+        android:layout_below="@+id/showMoreToggle"
         android:fadingEdge="vertical"
         android:fadingEdgeLength="50dp"
         android:background="?android:attr/listDivider" />
+
+
 </RelativeLayout>
 
