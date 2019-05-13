@@ -48,7 +48,7 @@ class Task_Fragment : Fragment() {
                 "* Essen kochen und dann noch laufen und Einkaufen",
                 urgency = URGENCY_IMPORTANCE_QUADRANT.URGENT_IMPORTANT,
                 description = "Fenster hat abgeblätterte Farbe. Fenster hat abgeblätterte Farbe. Fenster hat abgeblätterte Farbe. Fenster hat abgeblätterte Farbe. Fenster hat abgeblätterte Farbe.", dueDate = Date(), images = null),
-                Task(title = "Nicht so viel Text",
+                Task(title = "Nicht so viel Text. Und jetztz mehr Text als Test. Mal schauen was passiert. Nicht so viel Textalffffabla. Und jetztz mehr Text als Test. Mal schauen was passiert.",
                 urgency = URGENCY_IMPORTANCE_QUADRANT.URGENT_IMPORTANT,
                 description = "Fenster hat abgeblätterte Farbe.", dueDate = null, images = null),
                 Task(title = "Nicht so viel Text",

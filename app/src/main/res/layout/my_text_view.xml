@@ -8,23 +8,52 @@
     <View
         android:id="@+id/divider_top"
         android:layout_width="match_parent"
+        android:layout_height="1dp"
         android:layout_marginLeft="18dp"
         android:layout_marginRight="18dp"
-        android:layout_height="1dp"
         android:background="?android:attr/listDivider" />
 
     <TextView
         android:id="@+id/task_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="18dp"
+        android:layout_marginTop="11dp"
+        android:layout_below="@+id/divider_top"
+        android:layout_toStartOf="@+id/button"
+        android:layout_alignStart="@+id/divider_top"
         android:textSize="21sp"
         android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/divider_top"
+        android:layout_alignEnd="@+id/divider_top"
+        android:textSize="12sp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="-3dp"
+        android:minWidth="86dp"
+        android:minHeight="0dp"
+        android:text="Open" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button"
+        android:layout_alignEnd="@+id/divider_top"
+        android:textSize="12sp"
+        android:layout_marginRight="-3dp"
+        android:minWidth="0dp"
+        android:minHeight="0dp"
+        android:text="Complete" />
 
     <TextView
         android:id="@+id/task_urgency"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
         android:layout_below="@+id/task_title"
         android:paddingLeft="18dp"
         android:text="@string/important_urgent"
@@ -36,6 +65,7 @@
         android:id="@+id/task_due_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
         android:layout_below="@+id/task_title"
         android:layout_toRightOf="@+id/task_urgency"
         android:paddingLeft="37dp"
@@ -48,8 +78,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/task_urgency"
-        android:layout_marginTop="18dp"
         android:layout_marginLeft="18dp"
+        android:layout_marginTop="18dp"
         android:layout_marginRight="18dp"
         android:layout_marginBottom="4dp"
         android:text="Das ist eine Beispiel Beschreibung. Wir sollten also darauf achten wie sich das ganze verhält. BLABLALBLALABL.
@@ -61,31 +91,30 @@
 
     <ToggleButton
         android:id="@+id/showMoreToggle"
-        android:minHeight="0dp"
-        android:minWidth="0dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/task_description"
         android:layout_alignEnd="@+id/task_description"
-        android:onClick="onClick"
+        android:layout_marginLeft="18dp"
         android:background="?android:attr/selectableItemBackground"
+        android:minWidth="0dp"
+        android:minHeight="0dp"
+        android:onClick="onClick"
         android:textColor="@color/colorPrimary"
         android:textOff="More"
         android:textOn="Less"
-        android:visibility="gone"
-        android:layout_marginLeft="18dp"
-        />
+        android:visibility="gone" />
 
     <View
         android:id="@+id/divider_bottom"
         android:layout_width="match_parent"
-        android:layout_marginLeft="18dp"
-        android:layout_marginRight="18dp"
         android:layout_height="1dp"
         android:layout_below="@+id/showMoreToggle"
+        android:layout_marginLeft="18dp"
+        android:layout_marginRight="18dp"
+        android:background="?android:attr/listDivider"
         android:fadingEdge="vertical"
-        android:fadingEdgeLength="50dp"
-        android:background="?android:attr/listDivider" />
+        android:fadingEdgeLength="50dp" />
 
 
 </RelativeLayout>
