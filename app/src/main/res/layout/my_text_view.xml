@@ -19,13 +19,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="11dp"
         android:layout_below="@+id/divider_top"
-        android:layout_toStartOf="@+id/button"
+        android:layout_toStartOf="@+id/button_open"
         android:layout_alignStart="@+id/divider_top"
         android:textSize="21sp"
         android:textStyle="bold" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/button_open"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/divider_top"
@@ -38,10 +38,10 @@
         android:text="Open" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/button_complete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/button"
+        android:layout_below="@+id/button_open"
         android:layout_alignEnd="@+id/divider_top"
         android:textSize="12sp"
         android:layout_marginRight="-3dp"
@@ -99,7 +99,6 @@
         android:background="?android:attr/selectableItemBackground"
         android:minWidth="0dp"
         android:minHeight="0dp"
-        android:onClick="onClick"
         android:textColor="@color/colorPrimary"
         android:textOff="More"
         android:textOn="Less"

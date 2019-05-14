@@ -36,9 +36,12 @@ dependencies {
     implementation deps.support.fragment_runtime_ktx
     implementation deps.support.recyclerview
     implementation deps.support.cardview
+    implementation deps.support.viewpager
     // "androidx.fragment:fragment-testing" must be scoped to all sourcesets.
     implementation deps.support.fragment_testing
     // Espresso and UI Testing
+    implementation deps.support.app_compat
+    implementation deps.constraint_layout
     androidTestImplementation deps.atsl.ext_junit
     androidTestImplementation deps.mockito.android
     androidTestImplementation deps.espresso.core

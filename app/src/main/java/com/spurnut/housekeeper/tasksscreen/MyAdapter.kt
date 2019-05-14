@@ -1,5 +1,6 @@
 package com.spurnut.housekeeper.tasksscreen
 
+import android.app.PendingIntent.getActivity
 import android.text.Spanned
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +17,7 @@ import android.text.TextWatcher
 import android.view.ViewTreeObserver
 import android.widget.Button
 import android.content.ContentValues.TAG
+import android.content.Intent
 import android.util.Log
 
 
@@ -30,15 +32,25 @@ class MyAdapter(private var myDataset: List<Task>) :
             View.OnClickListener {
 
         override fun onClick(v: View) {
-            if (item.showMoreToggle.isChecked) {
-                item.task_description.setLines(item.task_description.lineCount)
-            } else {
-                item.task_description.setLines(2)
+
+            when(v.id) {
+                R.id.showMoreToggle -> {
+                    if (item.showMoreToggle.isChecked) {
+                        item.task_description.setLines(item.task_description.lineCount)
+                    } else {
+                        item.task_description.setLines(2)
+                    }
+                }
+                R.id.button_open -> {
+                    val intent = Intent(v.context,TaskDetailActivity::class.java)
+                    v.context.startActivity(intent)
+                }
             }
         }
 
         init {
             item.showMoreToggle.setOnClickListener(this)
+            item.button_open.setOnClickListener(this)
             val count = item.task_description.lineCount
             println(count)
 
