@@ -1,6 +1,5 @@
 package com.spurnut.housekeeper.tasksscreen
 
-import android.app.PendingIntent.getActivity
 import android.text.Spanned
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +8,7 @@ import androidx.core.text.HtmlCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.spurnut.housekeeper.R
 import com.spurnut.housekeeper.model.Task
-import kotlinx.android.synthetic.main.my_text_view.view.*
+import kotlinx.android.synthetic.main.task_view.view.*
 import org.markdown4j.Markdown4jProcessor;
 import android.content.Context
 import android.text.Editable
@@ -86,7 +85,7 @@ class MyAdapter(private var myDataset: List<Task>) :
         // create a new view
         //TODO rename textview into something correct
         val textView = LayoutInflater.from(parent.context)
-                .inflate(com.spurnut.housekeeper.R.layout.my_text_view, parent, false)
+                .inflate(com.spurnut.housekeeper.R.layout.task_view, parent, false)
 
         return MyViewHolder(textView)
     }

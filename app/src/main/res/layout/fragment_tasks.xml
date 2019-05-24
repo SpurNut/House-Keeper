@@ -13,4 +13,4 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
     tools:context="com.spurnut.housekeeper.tasksscreen.Task_Fragment"
-    tools:listitem="@layout/my_text_view"/>
+    tools:listitem="@layout/task_view"/>
