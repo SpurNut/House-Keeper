@@ -21,4 +21,6 @@
     <string name="menu_send">Send</string>
     <string name="due_on">Due On:</string>
     <string name="important_urgent">Important + Urgent</string>
+    <string name="edit">edit</string>
+    <string name="complete">complete</string>
 </resources>
