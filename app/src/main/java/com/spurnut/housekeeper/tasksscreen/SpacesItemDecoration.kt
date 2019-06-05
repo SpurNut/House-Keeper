@@ -11,15 +11,18 @@ class SpacesItemDecoration(private val space: Int) : RecyclerView.ItemDecoration
 
     override fun getItemOffsets(outRect: Rect, view: View,
                                 parent: RecyclerView, state: RecyclerView.State) {
-        outRect.left = space
-        outRect.right = space
-        outRect.bottom = space
+
+        val currentPosition = parent.getChildLayoutPosition(view)
+
+        outRect.right = 0
+        outRect.bottom = 0
+        outRect.top = space
 
         // Add top margin only for the first row to avoid double space between items
-        if (listOf(0, 1, 2).contains(parent.getChildLayoutPosition(view))) {
-            outRect.top = space
+        if (currentPosition == 0 || currentPosition.rem(3) == 0) {
+            outRect.left = 16
         } else {
-            outRect.top = 0
+            outRect.left = 0
         }
     }
 }
