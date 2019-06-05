@@ -1,5 +1,6 @@
 package com.spurnut.housekeeper.tasksscreen
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -14,8 +15,6 @@ import androidx.appcompat.widget.Toolbar
 class TaskDetailActivity : AppCompatActivity() {
 
     private var mPager: ViewPager? = null
-    private var currentPage = 0
-    private var NUM_PAGES = 0
     private val IMAGES = arrayOf<Int>(R.drawable.android, R.drawable.android,
             R.drawable.android, R.drawable.android)
     private val ImagesArray = ArrayList<Int>()
@@ -33,7 +32,7 @@ class TaskDetailActivity : AppCompatActivity() {
             ImagesArray.add(IMAGES[i])
 
         mPager = findViewById<View>(R.id.viewPager) as ViewPager
-        mPager?.setAdapter(SlidingImage_Adapter(this.applicationContext, ImagesArray))
+        mPager?.setAdapter(SlidingImageAdapter(this.applicationContext, ImagesArray))
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -45,6 +44,8 @@ class TaskDetailActivity : AppCompatActivity() {
         // Handle item selection
         when (item.getItemId()) {
             R.id.action_edit -> {
+                val intent = Intent(this, TaskEditActivity::class.java)
+                this.startActivity(intent)
             }
             R.id.action_complete -> {
             }

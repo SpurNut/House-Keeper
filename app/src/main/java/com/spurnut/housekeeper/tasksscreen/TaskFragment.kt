@@ -26,14 +26,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.spurnut.housekeeper.R
 import com.spurnut.housekeeper.model.Task
 import com.spurnut.housekeeper.model.URGENCY_IMPORTANCE_QUADRANT
-import java.text.DateFormat
 import java.util.*
 
 
 /**
  * Shows the main title screen with a button that navigates to [About].
  */
-class Task_Fragment : Fragment() {
+class TaskFragment : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
 
@@ -59,9 +58,9 @@ class Task_Fragment : Fragment() {
                         description = "Fenster hat abgeblätterte Farbe.", dueDate = Date(), images = null))
 
 
-        val viewAdapter = MyAdapter(tasks)
+        val viewAdapter = TaskViewAdapter(tasks)
 
-        recyclerView = view.findViewById<RecyclerView>(R.id.my_recycler_view).apply {
+        recyclerView = view.findViewById<RecyclerView>(R.id.recycler_view_tasks_fragment).apply {
             setHasFixedSize(true)
             adapter = viewAdapter
         }

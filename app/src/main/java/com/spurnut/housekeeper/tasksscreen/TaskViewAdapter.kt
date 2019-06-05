@@ -20,14 +20,14 @@ import android.content.Intent
 import android.util.Log
 
 
-class MyAdapter(private var myDataset: List<Task>) :
-        RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
+class TaskViewAdapter(private var taskDataset: List<Task>) :
+        RecyclerView.Adapter<TaskViewAdapter.TaskViewHolder>() {
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
     // you provide access to all the views for a data item in a view holder.
     // Each data item is just a string in this case that is shown in a TextView.
-    class MyViewHolder(val item: View) : RecyclerView.ViewHolder(item), TextWatcher,
+    class TaskViewHolder(val item: View) : RecyclerView.ViewHolder(item), TextWatcher,
             View.OnClickListener {
 
         override fun onClick(v: View) {
@@ -79,7 +79,7 @@ class MyAdapter(private var myDataset: List<Task>) :
 
     // Create new views (invoked by the layout manager)
     override fun onCreateViewHolder(parent: ViewGroup,
-                                    viewType: Int): MyAdapter.MyViewHolder {
+                                    viewType: Int): TaskViewAdapter.TaskViewHolder {
 
         mContext = parent.context
         // create a new view
@@ -87,16 +87,16 @@ class MyAdapter(private var myDataset: List<Task>) :
         val textView = LayoutInflater.from(parent.context)
                 .inflate(com.spurnut.housekeeper.R.layout.task_view, parent, false)
 
-        return MyViewHolder(textView)
+        return TaskViewHolder(textView)
     }
 
     // Replace the contents of a view (invoked by the layout manager)
-    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
 
         // title
-        val string = Markdown4jProcessor().process(myDataset[position].title).dropLast(2)
+        val string = Markdown4jProcessor().process(taskDataset[position].title).dropLast(2)
         val html = HtmlCompat.fromHtml(
                 string,
                 HtmlCompat.FROM_HTML_MODE_LEGACY).dropLast(2) as Spanned
@@ -104,14 +104,14 @@ class MyAdapter(private var myDataset: List<Task>) :
         holder.item.task_title.text = html
 
         //due date
-        if (myDataset[position].dueDate != null)
+        if (taskDataset[position].dueDate != null)
             holder.item.task_due_date.text = String.format("%s %s",
                     mContext?.resources?.getString(R.string.due_on),
-                    myDataset[position].dueDate.toString())
+                    taskDataset[position].dueDate.toString())
 
         //description
-        if (myDataset[position].description != null) {
-            holder.item.task_description.text = myDataset[position].description
+        if (taskDataset[position].description != null) {
+            holder.item.task_description.text = taskDataset[position].description
         }
 
 
@@ -133,7 +133,7 @@ class MyAdapter(private var myDataset: List<Task>) :
     }
 
     // Return the size of your dataset (invoked by the layout manager)
-    override fun getItemCount() = myDataset.size
+    override fun getItemCount() = taskDataset.size
 
-    fun getItems() = myDataset
+    fun getItems() = taskDataset
 }

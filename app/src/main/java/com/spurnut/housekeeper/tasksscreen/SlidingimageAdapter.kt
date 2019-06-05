@@ -16,13 +16,9 @@ import com.spurnut.housekeeper.R
 import java.util.ArrayList
 
 
-class SlidingImage_Adapter(private val context: Context, private val IMAGES: ArrayList<Int>) : PagerAdapter() {
-    private val inflater: LayoutInflater
+class SlidingImageAdapter(private val context: Context, private val IMAGES: ArrayList<Int>) : PagerAdapter() {
+    private val inflater: LayoutInflater = LayoutInflater.from(context)
 
-
-    init {
-        inflater = LayoutInflater.from(context)
-    }
 
     override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
         container.removeView(`object` as View)
