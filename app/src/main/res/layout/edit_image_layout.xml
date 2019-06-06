@@ -8,7 +8,7 @@
     >
 
     <Button
-        android:id="@+id/calc_clear_txt"
+        android:id="@+id/remove_image"
         android:layout_width="@dimen/box_size"
         android:layout_height="@dimen/box_size"
         android:layout_gravity="end|top"

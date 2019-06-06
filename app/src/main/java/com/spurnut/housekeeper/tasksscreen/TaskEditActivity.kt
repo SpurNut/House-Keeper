@@ -25,12 +25,16 @@ class TaskEditActivity : AppCompatActivity() {
 
         recyclerView = findViewById<RecyclerView>(R.id.recycler_view_edit_image).apply {
             layoutManager = staggeredGridLayoutManager
-            adapter = ImageViewAdapter(IMAGES)
+            adapter = ImageViewAdapter(add_add_photo_button(IMAGES))
         }
 
         val spacingInPixels = resources.getDimensionPixelSize(R.dimen.spacing)
         recyclerView.addItemDecoration(SpacesItemDecoration(spacingInPixels))
 
+    }
+
+    private fun add_add_photo_button(images: List<Int>) : List<Int>{
+        return listOf<Int>(R.drawable.ic_add_a_photo_black_24dp).plus(images)
     }
 
 }
