@@ -22,32 +22,34 @@ import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.content.ContextCompat
 import android.content.Context
 import android.os.Build
+import android.view.View
+import com.google.android.material.snackbar.Snackbar
 
 
 class TaskEditActivity : AppCompatActivity(), Callback {
 
-    override fun callbackCall() {
-        take_photo()
-    }
-
     private lateinit var recyclerView: RecyclerView
     var currentPhoto: String = ""
     val REQUEST_TAKE_PHOTO = 1
-    private val images = mutableListOf<Bitmap>()
+    private var images = listOf<Bitmap>()
 
     val imageViewAdapter: ImageViewAdapter = ImageViewAdapter(images)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //TODO check if it should create task by taking a photo
-        //take_photo()
+
+        if (getIntent().hasExtra("START_CAMERA")) {
+            take_photo()
+        }
 
         setContentView(R.layout.activity_task_edit)
 
         // set up the RecyclerView
         val numberOfColumns = 3
-        val staggeredGridLayoutManager = StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
-        staggeredGridLayoutManager.gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_MOVE_ITEMS_BETWEEN_SPANS
+        val staggeredGridLayoutManager = StaggeredGridLayoutManager(
+                3, StaggeredGridLayoutManager.VERTICAL)
+        staggeredGridLayoutManager.gapStrategy =
+                StaggeredGridLayoutManager.GAP_HANDLING_MOVE_ITEMS_BETWEEN_SPANS
 
 
         recyclerView = findViewById<RecyclerView>(R.id.recycler_view_edit_image).apply {
@@ -57,8 +59,8 @@ class TaskEditActivity : AppCompatActivity(), Callback {
         val spacingInPixels = resources.getDimensionPixelSize(R.dimen.spacing)
         recyclerView.addItemDecoration(SpacesItemDecoration(spacingInPixels))
         imageViewAdapter.callback = this
-        images.add(getBitmapFromVectorDrawable(this, R.drawable.ic_add_a_photo_black_24dp))
-
+        updateImageData(images.plus(getBitmapFromVectorDrawable(
+                this, R.drawable.ic_add_a_photo_black_24dp)))
     }
 
     private fun take_photo() {
@@ -92,8 +94,7 @@ class TaskEditActivity : AppCompatActivity(), Callback {
             val imgFile = File(currentPhoto)
             if (imgFile.exists()) {
                 val myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath())
-                images.add(myBitmap)
-                imageViewAdapter.notifyDataSetChanged()
+                updateImageData(images.plus(myBitmap))
             }
         }
     }
@@ -127,6 +128,37 @@ class TaskEditActivity : AppCompatActivity(), Callback {
         drawable.draw(canvas)
 
         return bitmap
+    }
+
+    override fun callbackCall(data: Map<String, Int>) {
+
+        if (data.containsKey("add")) {
+            take_photo()
+        } else if (data.containsKey("remove")) {
+            val imagePosition = data["remove"]
+            val img = images.get(imagePosition!!)
+
+            val mySnackbar = Snackbar.make(findViewById(R.id.coordinator_edit),
+                    "Image removed", Snackbar.LENGTH_LONG)
+            mySnackbar.setAction("undo", MyUndoListener(images))
+            updateImageData(images.minus(img))
+            mySnackbar.show()
+
+        }
+    }
+
+    private fun updateImageData(newData: List<Bitmap>) {
+        images = newData
+        imageViewAdapter.imageDataSet = newData
+        imageViewAdapter.notifyDataSetChanged()
+    }
+
+    inner class MyUndoListener(val oldImages: List<Bitmap>) : View.OnClickListener {
+
+        override fun onClick(v: View?) {
+            updateImageData(oldImages)
+        }
+
     }
 
 }

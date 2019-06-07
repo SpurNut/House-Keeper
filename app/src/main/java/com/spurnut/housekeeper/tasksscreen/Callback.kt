@@ -1,5 +1,5 @@
 package com.spurnut.housekeeper.tasksscreen
 
 interface Callback {
-    fun callbackCall()
+    fun callbackCall(data: Map<String, Int>)
 }

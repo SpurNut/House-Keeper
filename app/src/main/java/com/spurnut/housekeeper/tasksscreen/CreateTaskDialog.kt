@@ -21,6 +21,7 @@ class CreateTaskDialog : DialogFragment() {
                                 if(which == 1) {
                                     val intent = Intent(this.context, TaskEditActivity::class.java)
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                    intent.putExtra("START_CAMERA", true);
                                     startActivity(intent)
                                 }
                             })
