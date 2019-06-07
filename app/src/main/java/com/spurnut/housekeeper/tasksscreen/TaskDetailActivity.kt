@@ -3,9 +3,11 @@ package com.spurnut.housekeeper.tasksscreen
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Spanned
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.TextView
 import androidx.viewpager.widget.ViewPager
 import com.spurnut.housekeeper.R
 import kotlin.collections.ArrayList
@@ -33,6 +35,15 @@ class TaskDetailActivity : AppCompatActivity() {
 
         mPager = findViewById<View>(R.id.viewPager) as ViewPager
         mPager?.setAdapter(SlidingImageAdapter(this.applicationContext, ImagesArray))
+
+        val title = findViewById<View>(R.id.detail_task_title) as TextView
+        title.setText("New Set Title is longer as expected how does it look here tell me please and if it is even longer how does it look like?")
+
+        val description = findViewById<View>(R.id.detail_task_description) as TextView
+        val input = "Description:\n" + "# this is a description"
+
+
+        description.setText(markdownHtmlFromText(input))
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

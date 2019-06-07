@@ -32,7 +32,7 @@ class TaskViewAdapter(private var taskDataset: List<Task>) :
 
         override fun onClick(v: View) {
 
-            when(v.id) {
+            when (v.id) {
                 R.id.showMoreToggle -> {
                     if (item.showMoreToggle.isChecked) {
                         item.task_description.setLines(item.task_description.lineCount)
@@ -41,7 +41,7 @@ class TaskViewAdapter(private var taskDataset: List<Task>) :
                     }
                 }
                 R.id.button_open -> {
-                    val intent = Intent(v.context,TaskDetailActivity::class.java)
+                    val intent = Intent(v.context, TaskDetailActivity::class.java)
                     v.context.startActivity(intent)
                 }
             }
@@ -96,12 +96,7 @@ class TaskViewAdapter(private var taskDataset: List<Task>) :
         // - replace the contents of the view with that element
 
         // title
-        val string = Markdown4jProcessor().process(taskDataset[position].title).dropLast(2)
-        val html = HtmlCompat.fromHtml(
-                string,
-                HtmlCompat.FROM_HTML_MODE_LEGACY).dropLast(2) as Spanned
-
-        holder.item.task_title.text = html
+        holder.item.task_title.text = markdownHtmlFromText(taskDataset[position].title).dropLast(2)
 
         //due date
         if (taskDataset[position].dueDate != null)
@@ -111,7 +106,7 @@ class TaskViewAdapter(private var taskDataset: List<Task>) :
 
         //description
         if (taskDataset[position].description != null) {
-            holder.item.task_description.text = taskDataset[position].description
+            holder.item.task_description.text = markdownHtmlFromText("Description:\n" + taskDataset[position].description!!).dropLast(2)
         }
 
 
