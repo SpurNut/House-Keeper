@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android'
 
 android {
@@ -55,6 +56,18 @@ dependencies {
     testImplementation deps.espresso.core
     testImplementation deps.espresso.contrib
     testImplementation deps.espresso.intents
+    //room
+    implementation deps.room.runtime
+    kapt deps.room.compiler
+
+    implementation deps.paging_ktx
+
+    implementation deps.lifecycle.viewmodel_ktx
+    kapt deps.lifecycle.compiler
+    implementation deps.lifecycle.extensions
+
+    api deps.kotlin.coroutines
+
     implementation files('libs/markdown4j-2.2.jar')
     implementation 'com.davemorrissey.labs:subsampling-scale-image-view:3.10.0'
 

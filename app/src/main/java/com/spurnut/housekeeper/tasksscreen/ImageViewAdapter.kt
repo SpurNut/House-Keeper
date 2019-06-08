@@ -62,7 +62,7 @@ class ImageViewAdapter(var imageDataSet: List<Bitmap>) :
         }
 
         private fun create_callback_data(key: String, value: Int): Map<String, Int> {
-            val map: HashMap<String, Int> = HashMap<String, Int>()
+            val map: HashMap<String, Int> = HashMap()
             map.put(key = key, value = value)
             return map
         }

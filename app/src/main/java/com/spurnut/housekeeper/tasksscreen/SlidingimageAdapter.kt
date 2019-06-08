@@ -1,7 +1,6 @@
 package com.spurnut.housekeeper.tasksscreen
 
 import android.content.Context
-import android.media.Image
 import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
@@ -9,14 +8,12 @@ import android.view.ViewGroup
 import android.widget.ImageView
 
 import androidx.viewpager.widget.PagerAdapter
-import com.davemorrissey.labs.subscaleview.ImageSource
-import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView
 import com.spurnut.housekeeper.R
 
 import java.util.ArrayList
 
 
-class SlidingImageAdapter(private val context: Context, private val IMAGES: ArrayList<Int>) : PagerAdapter() {
+class SlidingImageAdapter(context: Context, private val IMAGES: ArrayList<Int>) : PagerAdapter() {
     private val inflater: LayoutInflater = LayoutInflater.from(context)
 
 

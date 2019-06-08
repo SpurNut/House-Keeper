@@ -3,7 +3,6 @@ package com.spurnut.housekeeper.tasksscreen
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Spanned
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -17,7 +16,7 @@ import androidx.appcompat.widget.Toolbar
 class TaskDetailActivity : AppCompatActivity() {
 
     private var mPager: ViewPager? = null
-    private val IMAGES = arrayOf<Int>(R.drawable.android, R.drawable.android,
+    private val IMAGES = arrayOf(R.drawable.android, R.drawable.android,
             R.drawable.android, R.drawable.android)
     private val ImagesArray = ArrayList<Int>()
 

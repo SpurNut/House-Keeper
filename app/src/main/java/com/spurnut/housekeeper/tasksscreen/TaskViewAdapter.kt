@@ -1,15 +1,12 @@
 package com.spurnut.housekeeper.tasksscreen
 
-import android.text.Spanned
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.text.HtmlCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.spurnut.housekeeper.R
-import com.spurnut.housekeeper.model.Task
+import com.spurnut.housekeeper.database.enity.Task
 import kotlinx.android.synthetic.main.task_view.view.*
-import org.markdown4j.Markdown4jProcessor;
 import android.content.Context
 import android.text.Editable
 import android.text.TextWatcher
@@ -20,8 +17,10 @@ import android.content.Intent
 import android.util.Log
 
 
-class TaskViewAdapter(private var taskDataset: List<Task>) :
+class TaskViewAdapter :
         RecyclerView.Adapter<TaskViewAdapter.TaskViewHolder>() {
+
+    private var tasks = emptyList<Task>()
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -79,13 +78,13 @@ class TaskViewAdapter(private var taskDataset: List<Task>) :
 
     // Create new views (invoked by the layout manager)
     override fun onCreateViewHolder(parent: ViewGroup,
-                                    viewType: Int): TaskViewAdapter.TaskViewHolder {
+                                    viewType: Int): TaskViewHolder {
 
         mContext = parent.context
         // create a new view
         //TODO rename textview into something correct
         val textView = LayoutInflater.from(parent.context)
-                .inflate(com.spurnut.housekeeper.R.layout.task_view, parent, false)
+                .inflate(R.layout.task_view, parent, false)
 
         return TaskViewHolder(textView)
     }
@@ -96,17 +95,17 @@ class TaskViewAdapter(private var taskDataset: List<Task>) :
         // - replace the contents of the view with that element
 
         // title
-        holder.item.task_title.text = markdownHtmlFromText(taskDataset[position].title).dropLast(2)
+        holder.item.task_title.text = markdownHtmlFromText(tasks[position].title).dropLast(2)
 
         //due date
-        if (taskDataset[position].dueDate != null)
-            holder.item.task_due_date.text = String.format("%s %s",
-                    mContext?.resources?.getString(R.string.due_on),
-                    taskDataset[position].dueDate.toString())
+//        if (tasks[position].dueDate != null)
+//            holder.item.task_due_date.text = String.format("%s %s",
+//                    mContext?.resources?.getString(R.string.due_on),
+//                    tasks[position].dueDate.toString())
 
         //description
-        if (taskDataset[position].description != null) {
-            holder.item.task_description.text = markdownHtmlFromText("Description:\n" + taskDataset[position].description!!).dropLast(2)
+        if (tasks[position].description != null) {
+            holder.item.task_description.text = markdownHtmlFromText("Description:\n" + tasks[position].description!!).dropLast(2)
         }
 
 
@@ -128,7 +127,11 @@ class TaskViewAdapter(private var taskDataset: List<Task>) :
     }
 
     // Return the size of your dataset (invoked by the layout manager)
-    override fun getItemCount() = taskDataset.size
+    override fun getItemCount() = tasks.size
 
-    fun getItems() = taskDataset
+    fun setTasks(tasks: List<Task>) {
+        this.tasks = tasks
+        notifyDataSetChanged()
+
+    }
 }

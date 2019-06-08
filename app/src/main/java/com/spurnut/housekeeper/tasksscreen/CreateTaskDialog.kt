@@ -15,13 +15,13 @@ class CreateTaskDialog : DialogFragment() {
             val builder = AlertDialog.Builder(it)
             builder.setTitle(R.string.create_task)
                     .setItems(R.array.create_options,
-                            DialogInterface.OnClickListener { dialog, which ->
+                            { dialog, which ->
                                 // The 'which' argument contains the index position
                                 // of the selected item
                                 if(which == 1) {
                                     val intent = Intent(this.context, TaskEditActivity::class.java)
-                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                    intent.putExtra("START_CAMERA", true);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                                    intent.putExtra("START_CAMERA", true)
                                     startActivity(intent)
                                 }
                             })
