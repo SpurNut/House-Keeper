@@ -16,4 +16,4 @@ import java.util.*
                     onDelete = CASCADE)])
 data class TaskPhoto(
         @PrimaryKey val uid: String,
-        @NonNull @ColumnInfo(name = "task_id") val taskId: String)
+        @NonNull @ColumnInfo(name = "task_id") val taskId: Int)

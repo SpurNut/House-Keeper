@@ -7,14 +7,17 @@ import com.spurnut.housekeeper.database.enity.Task
 @Dao
 interface TaskDao {
     @Insert
-    fun insert(task: Task)
+    suspend fun insert(task: Task) : Long
 
     @Update
-    fun update(task: Task)
+    suspend fun update(task: Task)
 
     @Delete
-    fun delete(task: Task)
+    suspend fun delete(task: Task)
 
-    @Query("SELECT * from task_table")
+    @Query("SELECT * from task_table WHERE task_completed == 0")
     fun getAllTasks(): LiveData<List<Task>>
+
+    @Query("SELECT * from task_table WHERE id == :task_id")
+    fun getTaskById(task_id: Int): LiveData<Task>
 }

@@ -37,13 +37,13 @@
             android:inputType="textMultiLine" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/button_close"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/editTextDescription"
             android:layout_alignEnd="@+id/editTextDescription"
             android:layout_margin="16dp"
-            android:text="@string/apply" />
+            android:text="@string/close" />
 
     </RelativeLayout>
 

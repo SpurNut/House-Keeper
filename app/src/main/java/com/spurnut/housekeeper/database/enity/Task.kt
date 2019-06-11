@@ -14,7 +14,8 @@ enum class UrgencyImportantQuadrant {
 @Entity(tableName = "task_table")
 data class Task(
         @PrimaryKey(autoGenerate = true) val id: Int,
-        @NonNull @ColumnInfo(name = "task_title") val title: String,
+        @ColumnInfo(name = "task_completed") val completed: Boolean,
+        @ColumnInfo(name = "task_title") val title: String,
         @ColumnInfo(name = "urgency") val urgency: UrgencyImportantQuadrant,
         @ColumnInfo(name = "description") val description: String?,
         @ColumnInfo(name = "dueDate") val dueDate: Date?)

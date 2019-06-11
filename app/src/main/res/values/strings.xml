@@ -28,6 +28,10 @@
     <string name="task_title">Title</string>
     <string name="description">Description</string>
     <string name="next">Next</string>
-    <string name="apply">Apply</string>
+    <string name="close">Close</string>
     <string name="create_task">Create Task</string>
+    <string name="start_camera">START_CAMERA</string>
+    <string name="edit_existing_task">edit_existing_task</string>
+    <string name="question_complete_task">Complete Task?</string>
+    <string name="cancel">cancel</string>
 </resources>

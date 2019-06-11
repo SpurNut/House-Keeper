@@ -9,12 +9,13 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.RecyclerView
 import com.spurnut.housekeeper.R
-import com.spurnut.housekeeper.database.viewmodel.TaskViewModel
+import com.spurnut.housekeeper.database.enity.Task
+import com.spurnut.housekeeper.database.viewmodel.TaskOverviewViewModel
 
-class TaskFragment : Fragment() {
+class TaskFragment : Fragment(), Callback<String, Task> {
 
     private lateinit var recyclerView: RecyclerView
-    private lateinit var taskViewModel: TaskViewModel
+    private lateinit var taskOverviewViewModel: TaskOverviewViewModel
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -22,9 +23,10 @@ class TaskFragment : Fragment() {
 
         val view = inflater.inflate(R.layout.fragment_tasks, container, false)
         val viewAdapter = TaskViewAdapter()
+        viewAdapter.callback = this
 
-        taskViewModel = ViewModelProviders.of(this).get(TaskViewModel::class.java)
-        taskViewModel.allTasks.observe(this, Observer { tasks ->
+        taskOverviewViewModel = ViewModelProviders.of(this).get(TaskOverviewViewModel::class.java)
+        taskOverviewViewModel.allTasks.observe(this, Observer { tasks ->
             // Update the cached copy of the words in the adapter.
             tasks?.let { viewAdapter.setTasks(it) }
         })
@@ -35,6 +37,18 @@ class TaskFragment : Fragment() {
         }
 
         return view
+    }
+
+    override fun callbackCall(data: Map<String, Task>) {
+
+        if (data.containsKey("complete")) {
+
+            val task = data["complete"]!!
+            taskOverviewViewModel
+            val fragmentManager = fragmentManager!!
+            val dialog = CompleteAlertDialog(taskOverviewViewModel, task)
+            dialog.show(fragmentManager, null)
+        }
     }
 
 

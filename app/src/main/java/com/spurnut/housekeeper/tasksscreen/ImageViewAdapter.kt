@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.edit_image_layout.view.*
 class ImageViewAdapter(var imageDataSet: List<Bitmap>) :
         RecyclerView.Adapter<ImageViewAdapter.ImageViewHolder>() {
 
-    var callback: Callback? = null
+    var callback: Callback<String, Int>? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageViewHolder {
 
@@ -42,26 +42,26 @@ class ImageViewAdapter(var imageDataSet: List<Bitmap>) :
             View.OnClickListener {
 
         init {
-                item.setOnClickListener(this)
-                item.remove_image.setOnClickListener(this)
+            item.setOnClickListener(this)
+            item.remove_image.setOnClickListener(this)
         }
 
         override fun onClick(v: View?) {
             if (!item.remove_image.isVisible) {
-                val callbackData = create_callback_data(key = "add", value = 1)
+                val callbackData = createCallbackData(key = "add", value = 1)
                 callback!!.callbackCall(data = callbackData)
             } else {
                 when (v!!.id) {
                     R.id.remove_image -> {
 
-                        val callbackData = create_callback_data(key = "remove", value = layoutPosition)
+                        val callbackData = createCallbackData(key = "remove", value = layoutPosition)
                         callback!!.callbackCall(data = callbackData)
                     }
                 }
             }
         }
 
-        private fun create_callback_data(key: String, value: Int): Map<String, Int> {
+        private fun createCallbackData(key: String, value: Int): Map<String, Int> {
             val map: HashMap<String, Int> = HashMap()
             map.put(key = key, value = value)
             return map

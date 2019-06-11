@@ -16,19 +16,32 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import java.io.File
 import java.io.IOException
-import java.util.*
 import com.spurnut.housekeeper.R
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.content.ContextCompat
 import android.content.Context
 import android.os.Build
 import android.view.View
+import android.widget.Button
+import android.widget.EditText
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.textfield.TextInputLayout
+import com.spurnut.housekeeper.database.enity.Task
+import com.spurnut.housekeeper.database.enity.TaskPhoto
+import com.spurnut.housekeeper.database.enity.UrgencyImportantQuadrant
+import com.spurnut.housekeeper.database.viewmodel.TaskViewModel
+import com.spurnut.housekeeper.database.viewmodel.TaskViewModelFactory
+import java.util.*
 
 
-class TaskEditActivity : AppCompatActivity(), Callback {
+class TaskEditActivity : AppCompatActivity(), Callback<String, Int> {
 
+    private var newTask: Boolean = true
+    private var task_id: Int = -1
     private lateinit var recyclerView: RecyclerView
+    private lateinit var taskviewModel: TaskViewModel
     var currentPhoto: String = ""
     val REQUEST_TAKE_PHOTO = 1
     private var images = listOf<Bitmap>()
@@ -38,7 +51,43 @@ class TaskEditActivity : AppCompatActivity(), Callback {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        if (getIntent().hasExtra("START_CAMERA")) {
+        if (intent.hasExtra("edit_existing_task")) {
+            newTask = false
+            task_id = intent.getIntExtra("edit_existing_task", -1)
+        } else {
+            if (intent.hasExtra("START_CAMERA")) {
+                task_id = intent.getIntExtra("START_CAMERA", -1)
+            } else if (intent.hasExtra("TASK_FROM_TEXT")) {
+                task_id = intent.getIntExtra("TASK_FROM_TEXT", -1)
+            }
+        }
+
+        val factory = TaskViewModelFactory(application, task_id)
+        taskviewModel = ViewModelProviders.of(this, factory).get(TaskViewModel::class.java)
+
+        taskviewModel.task.observe(this, Observer { task: Task ->
+            // Update the cached copy of the task in the adapter.
+            setTask(task)
+        })
+
+        taskviewModel.images.observe(this, Observer { images_ ->
+            // Update the cached copy of the words in the adapter.
+            var newImages: List<Bitmap> = emptyList<Bitmap>()
+            newImages = newImages.plus(getBitmapFromVectorDrawable(
+                    this, R.drawable.ic_add_a_photo_black_24dp))
+            images_?.let {
+                for (image in it) {
+                    val imgFile = File(image.uid)
+                    if (imgFile.exists()) {
+                        newImages = newImages.plus(BitmapFactory.decodeFile(imgFile.getAbsolutePath()))
+                    }
+                }
+            }
+            updateImageData(newImages)
+        })
+
+
+        if (getIntent().hasExtra(getString(R.string.start_camera))) {
             take_photo()
         }
 
@@ -47,7 +96,7 @@ class TaskEditActivity : AppCompatActivity(), Callback {
         // set up the RecyclerView
         val numberOfColumns = 3
         val staggeredGridLayoutManager = StaggeredGridLayoutManager(
-                3, StaggeredGridLayoutManager.VERTICAL)
+                numberOfColumns, StaggeredGridLayoutManager.VERTICAL)
         staggeredGridLayoutManager.gapStrategy =
                 StaggeredGridLayoutManager.GAP_HANDLING_MOVE_ITEMS_BETWEEN_SPANS
 
@@ -59,8 +108,20 @@ class TaskEditActivity : AppCompatActivity(), Callback {
         val spacingInPixels = resources.getDimensionPixelSize(R.dimen.spacing)
         recyclerView.addItemDecoration(SpacesItemDecoration(spacingInPixels))
         imageViewAdapter.callback = this
-        updateImageData(images.plus(getBitmapFromVectorDrawable(
-                this, R.drawable.ic_add_a_photo_black_24dp)))
+
+
+        val applyButton = findViewById<Button>(R.id.button_close)
+        applyButton.setOnClickListener {
+            //ToDo db aufruf
+            onBackPressed()
+        };
+
+
+    }
+
+    private fun setTask(task: Task) {
+        findViewById<TextInputLayout>(R.id.text_input_title).editText?.setText(task.title)
+        findViewById<EditText>(R.id.editTextDescription).setText(task.description)
     }
 
     private fun take_photo() {
@@ -92,11 +153,20 @@ class TaskEditActivity : AppCompatActivity(), Callback {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == REQUEST_TAKE_PHOTO && resultCode == Activity.RESULT_OK) {
             val imgFile = File(currentPhoto)
-            if (imgFile.exists()) {
-                val myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath())
-                updateImageData(images.plus(myBitmap))
-            }
+
+            //save picture in db
+            savePhoto(currentPhoto)
+//            }
         }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        updateTask()
+    }
+
+    private fun savePhoto(currentPhoto: String) {
+        taskviewModel.insert(TaskPhoto(currentPhoto, task_id))
     }
 
 
@@ -135,16 +205,22 @@ class TaskEditActivity : AppCompatActivity(), Callback {
         if (data.containsKey("add")) {
             take_photo()
         } else if (data.containsKey("remove")) {
-            val imagePosition = data["remove"]
-            val img = images.get(imagePosition!!)
+            val imagePosition = data["remove"]!! - 1
+            val id = taskviewModel.images.value!![imagePosition].taskId
+            val filePath = taskviewModel.images.value!![imagePosition].uid
+
+            taskviewModel.delete(taskviewModel.images.value!![imagePosition])
 
             val mySnackbar = Snackbar.make(findViewById(R.id.coordinator_edit),
                     "Image removed", Snackbar.LENGTH_LONG)
-            mySnackbar.setAction("undo", MyUndoListener(images))
-            updateImageData(images.minus(img))
+            mySnackbar.setAction("undo", MyUndoListener(filePath, id))
             mySnackbar.show()
 
         }
+    }
+
+    private fun updateTask() {
+        taskviewModel.update(Task(task_id, false, findViewById<TextInputLayout>(R.id.text_input_title).editText?.text.toString(), UrgencyImportantQuadrant.URGENT_NOT_IMPORTANT, findViewById<EditText>(R.id.editTextDescription).text.toString(), Date(1290213012)))
     }
 
     private fun updateImageData(newData: List<Bitmap>) {
@@ -153,10 +229,10 @@ class TaskEditActivity : AppCompatActivity(), Callback {
         imageViewAdapter.notifyDataSetChanged()
     }
 
-    inner class MyUndoListener(val oldImages: List<Bitmap>) : View.OnClickListener {
+    inner class MyUndoListener(val filePath: String, val id: Int) : View.OnClickListener {
 
         override fun onClick(v: View?) {
-            updateImageData(oldImages)
+            taskviewModel.insert(TaskPhoto(filePath, id))
         }
 
     }

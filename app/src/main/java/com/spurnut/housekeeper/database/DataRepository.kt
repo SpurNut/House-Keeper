@@ -1,44 +1,63 @@
 package com.spurnut.housekeeper.database
 
-import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
 import com.spurnut.housekeeper.database.enity.House
 import com.spurnut.housekeeper.database.enity.Task
+import com.spurnut.housekeeper.database.enity.TaskPhoto
 import com.spurnut.housekeeper.database.enity.User
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 class DataRepository(val appDatabase: HouseKeeperRoomDatabase) {
 
+    // Room executes all queries on a separate thread.
+    // Observed LiveData will notify the observer when the data has changed.
     val allTasks: LiveData<List<Task>> = appDatabase.taskDao().getAllTasks()
-    val allUsers: LiveData<List<User>> = appDatabase.userDao().getAllUsers()
-    val allHouses: LiveData<List<House>> = appDatabase.houseDao().getAllHouses()
+//    val allUsers: LiveData<List<User>> = appDatabase.userDao().getAllUsers()
+//    val allHouses: LiveData<List<House>> = appDatabase.houseDao().getAllHouses()
 
-    @WorkerThread
-    fun insert(task: Task) {
-        appDatabase.taskDao().insert(task)
+
+    // The suspend modifier tells the compiler that this must be called from a
+    // coroutine or another suspend function.
+    // This ensures that you're not doing any long running operations on the main
+    // thread, blocking the UI.
+    suspend fun insert(task: Task): Long {
+        return appDatabase.taskDao().insert(task)
     }
 
-    @WorkerThread
-    fun update(task: Task) {
+    suspend fun update(task: Task) {
         appDatabase.taskDao().update(task)
     }
 
-    @WorkerThread
-    fun insert(user: User){
+    fun getTaskById(task_id: Int): LiveData<Task> {
+        return appDatabase.taskDao().getTaskById(task_id)
+    }
+
+    fun getTaskPhotosById(task_id: Int): LiveData<List<TaskPhoto>> {
+        return appDatabase.taskPhotoDao().getTaskPhotosById(task_id)
+    }
+
+    suspend fun insert(taskPhoto: TaskPhoto) {
+        appDatabase.taskPhotoDao().insert(taskPhoto)
+    }
+
+    suspend fun insert(user: User){
         appDatabase.userDao().insert(user)
     }
 
-    @WorkerThread
-    fun update(user: User) {
+    suspend fun update(user: User) {
         appDatabase.userDao().update(user)
     }
 
-    @WorkerThread
-    fun insert(house: House) {
+    suspend fun insert(house: House) {
         appDatabase.houseDao().insert(house)
     }
 
-    @WorkerThread
-    fun update(house: House) {
+    suspend fun update(house: House) {
         appDatabase.houseDao().update(house)
+    }
+
+    suspend fun delete(taskPhoto: TaskPhoto) {
+        appDatabase.taskPhotoDao().delete(taskPhoto)
     }
 }

@@ -1,6 +1,7 @@
 package com.spurnut.housekeeper.tasksscreen
 
 import android.content.Context
+import android.graphics.Bitmap
 import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
@@ -13,7 +14,7 @@ import com.spurnut.housekeeper.R
 import java.util.ArrayList
 
 
-class SlidingImageAdapter(context: Context, private val IMAGES: ArrayList<Int>) : PagerAdapter() {
+class SlidingImageAdapter(context: Context, private val IMAGES: ArrayList<Bitmap>) : PagerAdapter() {
     private val inflater: LayoutInflater = LayoutInflater.from(context)
 
 
@@ -32,9 +33,7 @@ class SlidingImageAdapter(context: Context, private val IMAGES: ArrayList<Int>) 
         val imageView = imageLayout.findViewById(R.id.image) as ImageView
 
 
-//        imageView.setImage(ImageSource.resource(IMAGES[position]))
-//        imageView.setImage(ImageSource.resource(R.mipmap.ic_launcher))
-        imageView.setImageResource(IMAGES[position])
+        imageView.setImageBitmap(IMAGES[position])
 
         view.addView(imageLayout, 0)
 

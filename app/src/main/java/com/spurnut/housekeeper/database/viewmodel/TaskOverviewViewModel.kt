@@ -7,36 +7,30 @@ import androidx.lifecycle.viewModelScope
 import com.spurnut.housekeeper.database.DataRepository
 import com.spurnut.housekeeper.database.HouseKeeperRoomDatabase
 import com.spurnut.housekeeper.database.enity.Task
-import com.spurnut.housekeeper.database.enity.TaskPhoto
-
-
 import kotlinx.coroutines.*
 
-class TaskViewModel(application: Application, val task_id: Int) : AndroidViewModel(application), TViewModel {
+class TaskOverviewViewModel (application: Application) : AndroidViewModel(application), CoroutineScope by MainScope(), TViewModel {
 
     private val repository: DataRepository
-    val task: LiveData<Task>
-    val images: LiveData<List<TaskPhoto>>
+
+    // Using LiveData and caching what getAlphabetizedWords returns has several benefits:
+    // - We can put an observer on the data (instead of polling for changes) and only update the
+    //   the UI when the data actually changes.
+    // - Repository is completely separated from the UI through the ViewModel.
+    val allTasks: LiveData<List<Task>>
 
     init {
         repository = DataRepository(HouseKeeperRoomDatabase.getDatabase(application, viewModelScope))
-        task = repository.getTaskById(task_id)
-        images = repository.getTaskPhotosById(task_id)
+        allTasks = repository.allTasks
     }
 
-    fun insert(task: Task) = viewModelScope.launch {
-        repository.insert(task)
+    fun insert(task: Task): Int = runBlocking {
+        repository.insert(task).toInt()
     }
 
     override fun update(task: Task) = viewModelScope.launch {
         repository.update(task)
     }
 
-    fun insert(taskPhoto: TaskPhoto) = viewModelScope.launch {
-        repository.insert(taskPhoto)
-    }
 
-    fun delete(taskPhoto: TaskPhoto) = viewModelScope.launch {
-        repository.delete(taskPhoto)
-    }
 }

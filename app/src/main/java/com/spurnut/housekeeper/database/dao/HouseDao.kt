@@ -9,14 +9,14 @@ import com.spurnut.housekeeper.database.enity.House
 interface HouseDao {
 
     @Insert
-    fun insert(house: House)
+    suspend fun insert(house: House)
 
     @Update
-    fun update(house: House)
+    suspend fun update(house: House)
 
     @Delete
-    fun delete(house: House)
+    suspend fun delete(house: House)
 
-    @Query("SELECT * from house_table")
-    fun getAllHouses(): LiveData<List<House>>
+//    @Query("SELECT * from house_table")
+//    suspend fun getAllHouses(): LiveData<List<House>>
 }

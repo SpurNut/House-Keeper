@@ -21,12 +21,13 @@ class TaskViewAdapter :
         RecyclerView.Adapter<TaskViewAdapter.TaskViewHolder>() {
 
     private var tasks = emptyList<Task>()
+    var callback: Callback<String, Task>? = null
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
     // you provide access to all the views for a data item in a view holder.
     // Each data item is just a string in this case that is shown in a TextView.
-    class TaskViewHolder(val item: View) : RecyclerView.ViewHolder(item), TextWatcher,
+    inner class TaskViewHolder(val item: View) : RecyclerView.ViewHolder(item), TextWatcher,
             View.OnClickListener {
 
         override fun onClick(v: View) {
@@ -40,15 +41,28 @@ class TaskViewAdapter :
                     }
                 }
                 R.id.button_open -> {
+                    val task_id = tasks[this.adapterPosition].id
                     val intent = Intent(v.context, TaskDetailActivity::class.java)
+
+                    intent.putExtra("TASK_ID", task_id)
                     v.context.startActivity(intent)
                 }
+                R.id.button_complete -> {
+                    callback!!.callbackCall(createCallbackData("complete", tasks[this.adapterPosition]))
+                }
             }
+        }
+
+        private fun createCallbackData(key: String, value: Task): Map<String, Task> {
+            val map: HashMap<String, Task> = HashMap()
+            map.put(key = key, value = value)
+            return map
         }
 
         init {
             item.showMoreToggle.setOnClickListener(this)
             item.button_open.setOnClickListener(this)
+            item.button_complete.setOnClickListener(this)
             val count = item.task_description.lineCount
             println(count)
 
@@ -82,11 +96,10 @@ class TaskViewAdapter :
 
         mContext = parent.context
         // create a new view
-        //TODO rename textview into something correct
-        val textView = LayoutInflater.from(parent.context)
+        val layoutinflater = LayoutInflater.from(parent.context)
                 .inflate(R.layout.task_view, parent, false)
 
-        return TaskViewHolder(textView)
+        return TaskViewHolder(layoutinflater)
     }
 
     // Replace the contents of a view (invoked by the layout manager)
@@ -98,10 +111,10 @@ class TaskViewAdapter :
         holder.item.task_title.text = markdownHtmlFromText(tasks[position].title).dropLast(2)
 
         //due date
-//        if (tasks[position].dueDate != null)
-//            holder.item.task_due_date.text = String.format("%s %s",
-//                    mContext?.resources?.getString(R.string.due_on),
-//                    tasks[position].dueDate.toString())
+        if (tasks[position].dueDate != null)
+            holder.item.task_due_date.text = String.format("%s %s",
+                    mContext?.resources?.getString(R.string.due_on),
+                    tasks[position].dueDate.toString())
 
         //description
         if (tasks[position].description != null) {

@@ -12,6 +12,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.material.test.runner.AndroidJUnitRunner"
+        javaCompileOptions.annotationProcessorOptions.includeCompileClasspath = true
     }
     buildTypes {
         release {
@@ -66,7 +67,8 @@ dependencies {
     kapt deps.lifecycle.compiler
     implementation deps.lifecycle.extensions
 
-    api deps.kotlin.coroutines
+    implementation deps.kotlin.coroutines
+    implementation deps.room.coroutines
 
     implementation files('libs/markdown4j-2.2.jar')
     implementation 'com.davemorrissey.labs:subsampling-scale-image-view:3.10.0'
