@@ -13,6 +13,8 @@ import com.spurnut.housekeeper.database.viewmodel.TaskOverviewViewModel
 
 class CompleteAlertDialog(val viewModel:TViewModel, val task: Task) : DialogFragment() {
 
+    var callback:Callback<String,Boolean>? = null
+
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return activity?.let {
             // Use the Builder class for convenient dialog construction
@@ -22,6 +24,9 @@ class CompleteAlertDialog(val viewModel:TViewModel, val task: Task) : DialogFrag
                             DialogInterface.OnClickListener { dialog, id ->
                                 // FIRE ZE MISSILES!
                                 viewModel.update(Task(task.id, true, task.title, task.urgency, task.description, task.dueDate))
+                                val map = HashMap<String,Boolean>()
+                                map.put(key ="completed",value=true)
+                                callback!!.callbackCall(map)
                             })
                     .setNegativeButton(getString(R.string.cancel),
                             DialogInterface.OnClickListener { dialog, id ->

@@ -22,7 +22,12 @@ import com.spurnut.housekeeper.database.viewmodel.TaskViewModel
 import com.spurnut.housekeeper.database.viewmodel.TaskViewModelFactory
 
 
-class TaskDetailActivity : AppCompatActivity() {
+class TaskDetailActivity : AppCompatActivity(), Callback<String,Boolean> {
+    override fun callbackCall(data: Map<String, Boolean>) {
+        if (data.getOrElse("completed") { false }) {
+            onBackPressed()
+        }
+    }
 
     private var mPager: ViewPager? = null
     private lateinit var taskViewModel: TaskViewModel
@@ -103,6 +108,7 @@ class TaskDetailActivity : AppCompatActivity() {
             R.id.action_complete -> {
                 val fragmentManager = supportFragmentManager
                 val dialog = CompleteAlertDialog(taskViewModel, taskViewModel.task.value!!)
+                dialog.callback = this
                 dialog.show(fragmentManager, null)
             }
             else -> return super.onOptionsItemSelected(item)
