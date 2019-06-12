@@ -16,4 +16,7 @@ interface TaskPhotoDao {
 
     @Delete
     suspend fun delete(taskPhoto: TaskPhoto)
+
+    @Query("SELECT * from task_photo INNER JOIN task_table ON task_photo.task_id == task_table.id WHERE task_table.task_completed == 1")
+    fun getAllArchivedImages(): LiveData<List<TaskPhoto>>
 }

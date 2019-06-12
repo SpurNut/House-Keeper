@@ -8,6 +8,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import com.spurnut.housekeeper.database.enity.Task
 import com.spurnut.housekeeper.database.viewmodel.ArchivedTaskViewModel
 import com.spurnut.housekeeper.tasksscreen.Callback
@@ -46,6 +47,17 @@ class ArchiveDialog : DialogFragment(), Callback<String, Task> {
             setHasFixedSize(true)
             adapter = viewAdapter
         }
+
+        val fab: ExtendedFloatingActionButton = view.findViewById(R.id.fab_delete_archived)
+        view.findViewById<ExtendedFloatingActionButton>(R.id.fab_delete_archived).isEnabled = false
+        fab.setOnClickListener { view ->
+            archivedTaskViewModel.deleteAllArchived()
+        }
+
+        archivedTaskViewModel.allArchivedImages.observe(this, Observer { tasks ->
+            // Update the cached copy of the words in the adapter.
+            tasks?.let { view.findViewById<ExtendedFloatingActionButton>(R.id.fab_delete_archived).isEnabled = true }
+        })
 
         return view
     }

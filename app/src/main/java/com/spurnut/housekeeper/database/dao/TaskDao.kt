@@ -23,4 +23,7 @@ interface TaskDao {
 
     @Query("SELECT * from task_table WHERE id == :task_id")
     fun getTaskById(task_id: Int): LiveData<Task>
+
+    @Query("DELETE FROM task_table WHERE task_table.task_completed == 1")
+    fun deleteAllArchived()
 }

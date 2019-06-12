@@ -10,6 +10,7 @@ import kotlinx.coroutines.withContext
 
 class DataRepository(val appDatabase: HouseKeeperRoomDatabase) {
 
+    val allArchivedImages: LiveData<List<TaskPhoto>> = appDatabase.taskPhotoDao().getAllArchivedImages()
     // Room executes all queries on a separate thread.
     // Observed LiveData will notify the observer when the data has changed.
     val allTasks: LiveData<List<Task>> = appDatabase.taskDao().getAllTasks()
@@ -60,5 +61,9 @@ class DataRepository(val appDatabase: HouseKeeperRoomDatabase) {
 
     suspend fun delete(taskPhoto: TaskPhoto) {
         appDatabase.taskPhotoDao().delete(taskPhoto)
+    }
+
+    fun deleteAllArchived() {
+        appDatabase.taskDao().deleteAllArchived()
     }
 }
