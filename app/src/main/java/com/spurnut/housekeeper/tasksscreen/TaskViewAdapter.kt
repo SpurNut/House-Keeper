@@ -108,7 +108,7 @@ class TaskViewAdapter :
         // - replace the contents of the view with that element
 
         // title
-        holder.item.task_title.text = markdownHtmlFromText(tasks[position].title).dropLast(2)
+        holder.item.task_title.text = markdownHtmlFromText(tasks[position].title)
 
         //due date
         if (tasks[position].dueDate != null)
@@ -118,7 +118,7 @@ class TaskViewAdapter :
 
         //description
         if (tasks[position].description != null) {
-            holder.item.task_description.text = markdownHtmlFromText("Description:\n" + tasks[position].description!!).dropLast(2)
+            holder.item.task_description.text = markdownHtmlFromText("Description:\n" + tasks[position].description!!)
         }
 
 

@@ -18,6 +18,9 @@ interface TaskDao {
     @Query("SELECT * from task_table WHERE task_completed == 0")
     fun getAllTasks(): LiveData<List<Task>>
 
+    @Query("SELECT * from task_table WHERE task_completed == 1")
+    fun getAllArchivedTasks(): LiveData<List<Task>>
+
     @Query("SELECT * from task_table WHERE id == :task_id")
     fun getTaskById(task_id: Int): LiveData<Task>
 }

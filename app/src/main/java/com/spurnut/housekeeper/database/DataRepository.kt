@@ -13,6 +13,7 @@ class DataRepository(val appDatabase: HouseKeeperRoomDatabase) {
     // Room executes all queries on a separate thread.
     // Observed LiveData will notify the observer when the data has changed.
     val allTasks: LiveData<List<Task>> = appDatabase.taskDao().getAllTasks()
+    val allArchivedTasks: LiveData<List<Task>> = appDatabase.taskDao().getAllArchivedTasks()
 //    val allUsers: LiveData<List<User>> = appDatabase.userDao().getAllUsers()
 //    val allHouses: LiveData<List<House>> = appDatabase.houseDao().getAllHouses()
 

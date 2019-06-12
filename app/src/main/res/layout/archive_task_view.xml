@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+
+    <View
+        android:id="@+id/archived_divider_top"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="18dp"
+        android:layout_marginRight="18dp"
+        android:background="?android:attr/listDivider" />
+
+    <TextView
+        android:id="@+id/archived_task_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="11dp"
+        android:layout_below="@+id/archived_divider_top"
+        android:layout_toStartOf="@+id/button_revive"
+        android:layout_alignStart="@+id/archived_divider_top"
+        android:textSize="21sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/button_revive"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/archived_divider_top"
+        android:layout_alignEnd="@+id/archived_divider_top"
+        android:textSize="12sp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="-3dp"
+        android:minWidth="86dp"
+        android:minHeight="0dp"
+        android:text="Revive" />
+
+    <TextView
+        android:id="@+id/archived_task_urgency"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        android:layout_below="@+id/archived_task_title"
+        android:paddingLeft="18dp"
+        android:text="@string/important_urgent"
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/archived_task_due_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        android:layout_below="@+id/archived_task_title"
+        android:layout_toRightOf="@+id/archived_task_urgency"
+        android:paddingLeft="37dp"
+        android:text="24.04.2019"
+        android:textColor="@android:color/black"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+    <View
+        android:id="@+id/archived_divider_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/archived_task_due_date"
+        android:layout_marginLeft="18dp"
+        android:layout_marginRight="18dp"
+        android:background="?android:attr/listDivider"
+        android:fadingEdge="vertical"
+        android:fadingEdgeLength="50dp" />
+
+
+</RelativeLayout>

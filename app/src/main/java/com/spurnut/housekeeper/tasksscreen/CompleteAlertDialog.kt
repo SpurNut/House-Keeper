@@ -26,7 +26,7 @@ class CompleteAlertDialog(val viewModel:TViewModel, val task: Task) : DialogFrag
                                 viewModel.update(Task(task.id, true, task.title, task.urgency, task.description, task.dueDate))
                                 val map = HashMap<String,Boolean>()
                                 map.put(key ="completed",value=true)
-                                callback!!.callbackCall(map)
+                                callback?.callbackCall(map)
                             })
                     .setNegativeButton(getString(R.string.cancel),
                             DialogInterface.OnClickListener { dialog, id ->

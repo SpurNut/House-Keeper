@@ -47,6 +47,7 @@ class TaskFragment : Fragment(), Callback<String, Task> {
             taskOverviewViewModel
             val fragmentManager = fragmentManager!!
             val dialog = CompleteAlertDialog(taskOverviewViewModel, task)
+            dialog.callback
             dialog.show(fragmentManager, null)
         }
     }

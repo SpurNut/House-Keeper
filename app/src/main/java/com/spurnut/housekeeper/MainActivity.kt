@@ -127,11 +127,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_tools -> {
 
             }
-            R.id.nav_share -> {
-
-            }
-            R.id.nav_send -> {
-
+            R.id.nav_archive -> {
+                val dialogFragment = ArchiveDialog()
+                dialogFragment.show(supportFragmentManager, "Dialog")
             }
         }
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
