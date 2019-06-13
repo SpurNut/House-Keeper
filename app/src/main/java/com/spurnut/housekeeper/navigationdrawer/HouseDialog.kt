@@ -9,9 +9,19 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.RecyclerView
 import com.spurnut.housekeeper.R
+import com.spurnut.housekeeper.database.enity.House
 import com.spurnut.housekeeper.database.viewmodel.HouseViewModel
+import com.spurnut.housekeeper.tasksscreen.Callback
 
-class HouseDialog : DialogFragment() {
+class HouseDialog : DialogFragment(), Callback<String, House> {
+    override fun callbackCall(data: Map<String, House>) {
+        if (data.contains("edit")) {
+            val dialogFragment = AddEditHouseDialog(data["edit"])
+            if (fragmentManager != null) {
+                dialogFragment.show(fragmentManager!!, "Dialog");
+            }
+        }
+    }
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var houseViewModel: HouseViewModel
@@ -23,6 +33,7 @@ class HouseDialog : DialogFragment() {
         houseViewModel = ViewModelProviders.of(this).get(HouseViewModel::class.java)
 
         val viewAdapter = HouseViewAdapter(houseViewModel)
+        viewAdapter.callBack = this
         recyclerView = view.findViewById<RecyclerView>(R.id.recycler_view_houses_dialog).apply {
             setHasFixedSize(true)
             adapter = viewAdapter

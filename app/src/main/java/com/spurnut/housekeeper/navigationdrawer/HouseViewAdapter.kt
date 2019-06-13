@@ -4,17 +4,21 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.spurnut.housekeeper.R
 import com.spurnut.housekeeper.database.enity.House
 import com.spurnut.housekeeper.database.viewmodel.HouseViewModel
 import kotlinx.android.synthetic.main.house_view.view.*
+import androidx.appcompat.app.AppCompatActivity
+import com.spurnut.housekeeper.tasksscreen.Callback
+
 
 class HouseViewAdapter(val houseViewModel: HouseViewModel) :
         RecyclerView.Adapter<HouseViewAdapter.HouseViewHolder>() {
 
     private var houses = emptyList<House>()
-
+    var callBack : Callback<String, House>? = null
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
     // you provide access to all the views for a data item in a view holder.
@@ -27,6 +31,9 @@ class HouseViewAdapter(val houseViewModel: HouseViewModel) :
             when (v.id) {
                 R.id.button_edit -> {
                     //Todo open edit house dialog
+                    val map = HashMap<String,House>()
+                    map.put("edit",houses[adapterPosition])
+                    callBack!!.callbackCall(map)
                 }
                 R.id.button_delete -> {
                     houseViewModel.delete(houses[this.adapterPosition])

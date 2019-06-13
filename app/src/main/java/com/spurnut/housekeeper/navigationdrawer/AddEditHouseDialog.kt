@@ -38,16 +38,18 @@ class AddEditHouseDialog(val house: House?) : DialogFragment() {
             inputStreetNumber?.setText(house.streetNumber)
         }
 
-        dialogBuilder.setNegativeButton("CANCEL",
-                { dialog, _ -> dialog.dismiss() }
-        ).setPositiveButton("OK", { _, _ ->
-            if (house == null) {
-                houseViewModel.insert(House(0, inputStreetName!!.text.toString(), inputStreetNumber!!.text.toString()))
-            } else {
-                houseViewModel.update(House(house.id, inputStreetName!!.text.toString(), inputStreetNumber!!.text.toString()))
-            }
-        }
-        )
+        dialogBuilder
+                .setNegativeButton("CANCEL") { dialog, _ -> dialog.dismiss() }
+                .setPositiveButton("OK") { _, _ ->
+                    if (house == null) {
+                        houseViewModel.insert(
+                                House(0, inputStreetName!!.text.toString(),
+                                        inputStreetNumber!!.text.toString()))
+                    } else {
+                        houseViewModel.update(House(house.id, inputStreetName!!.text.toString(),
+                                inputStreetNumber!!.text.toString()))
+                    }
+                }
     }
 
     @NonNull
