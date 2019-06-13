@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <View
+        android:id="@+id/house_divider_top"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="18dp"
+        android:layout_marginRight="18dp"
+        android:background="?android:attr/listDivider" />
+
+    <TextView
+        android:id="@+id/house_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/house_divider_top"
+        android:layout_alignStart="@+id/house_divider_top"
+        android:layout_marginTop="11dp"
+        android:layout_toStartOf="@+id/button_edit"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/house_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/house_name"
+        android:layout_alignStart="@+id/house_divider_top"
+        android:layout_marginTop="11dp"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/button_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/house_divider_top"
+        android:layout_alignEnd="@+id/house_divider_top"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="-3dp"
+        android:minWidth="86dp"
+        android:minHeight="0dp"
+        android:text="Edit"
+        android:textSize="12sp" />
+
+    <Button
+        android:id="@+id/button_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button_edit"
+        android:layout_alignEnd="@+id/house_divider_top"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="-3dp"
+        android:minWidth="86dp"
+        android:minHeight="0dp"
+        android:text="Delete"
+        android:textSize="12sp" />
+
+    <View
+        android:id="@+id/house_divider_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/house_number"
+        android:layout_marginLeft="18dp"
+        android:layout_marginRight="18dp"
+        android:background="?android:attr/listDivider"
+        android:fadingEdge="vertical"
+        android:fadingEdgeLength="50dp" />
+</RelativeLayout>

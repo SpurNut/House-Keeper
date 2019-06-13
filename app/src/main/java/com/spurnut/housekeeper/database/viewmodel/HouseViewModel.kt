@@ -30,4 +30,8 @@ class HouseViewModel (application: Application) : AndroidViewModel(application),
         repository.update(house)
     }
 
+    fun delete(house: House) = viewModelScope.launch {
+        repository.delete(house)
+    }
+
 }

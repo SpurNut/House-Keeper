@@ -16,8 +16,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 import com.spurnut.housekeeper.tasksscreen.CreateTaskDialog
-import com.spurnut.housekeeper.navigationdrawer.AddHouseDialog
+import com.spurnut.housekeeper.navigationdrawer.AddEditHouseDialog
 import com.spurnut.housekeeper.navigationdrawer.ArchiveDialog
+import com.spurnut.housekeeper.navigationdrawer.HouseDialog
 
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -118,7 +119,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         // Handle navigation view item clicks here.
         when (item.itemId) {
             R.id.nav_add_house -> {
-                val dialogFragment = AddHouseDialog()
+                val dialogFragment = AddEditHouseDialog(null)
+                dialogFragment.show(supportFragmentManager, "Dialog")
+            }
+            R.id.nav_edit_houses -> {
+                val dialogFragment = HouseDialog()
                 dialogFragment.show(supportFragmentManager, "Dialog")
             }
             R.id.nav_archive -> {

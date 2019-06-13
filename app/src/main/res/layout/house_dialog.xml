@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/house_dialog_heading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Houses"
+        android:textAlignment="center"
+        android:textSize="27sp" />
+
+    <View
+        android:id="@+id/houses_top_divider"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_below="@+id/house_dialog_heading"
+        android:layout_marginLeft="18dp"
+        android:layout_marginRight="18dp"
+        android:background="?android:attr/listDivider"
+        android:fadingEdgeLength="50dp" />
+
+    <androidx.recyclerview.widget.RecyclerView xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/recycler_view_houses_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/houses_top_divider"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/house_view" />
+</RelativeLayout>

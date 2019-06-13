@@ -59,6 +59,10 @@ class DataRepository(val appDatabase: HouseKeeperRoomDatabase) {
         appDatabase.houseDao().update(house)
     }
 
+    suspend fun delete(house: House) {
+        appDatabase.houseDao().delete(house)
+    }
+
     suspend fun delete(taskPhoto: TaskPhoto) {
         appDatabase.taskPhotoDao().delete(taskPhoto)
     }
