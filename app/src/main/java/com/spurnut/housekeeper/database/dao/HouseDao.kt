@@ -17,6 +17,6 @@ interface HouseDao {
     @Delete
     suspend fun delete(house: House)
 
-//    @Query("SELECT * from house_table")
-//    suspend fun getAllHouses(): LiveData<List<House>>
+    @Query("SELECT * from house_table")
+    fun getAllHouses(): LiveData<List<House>>
 }

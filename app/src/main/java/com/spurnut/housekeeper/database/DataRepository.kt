@@ -10,13 +10,13 @@ import kotlinx.coroutines.withContext
 
 class DataRepository(val appDatabase: HouseKeeperRoomDatabase) {
 
-    val allArchivedImages: LiveData<List<TaskPhoto>> = appDatabase.taskPhotoDao().getAllArchivedImages()
     // Room executes all queries on a separate thread.
     // Observed LiveData will notify the observer when the data has changed.
     val allTasks: LiveData<List<Task>> = appDatabase.taskDao().getAllTasks()
+    val allArchivedImages: LiveData<List<TaskPhoto>> = appDatabase.taskPhotoDao().getAllArchivedImages()
     val allArchivedTasks: LiveData<List<Task>> = appDatabase.taskDao().getAllArchivedTasks()
 //    val allUsers: LiveData<List<User>> = appDatabase.userDao().getAllUsers()
-//    val allHouses: LiveData<List<House>> = appDatabase.houseDao().getAllHouses()
+    val allHouses: LiveData<List<House>> = appDatabase.houseDao().getAllHouses()
 
 
     // The suspend modifier tells the compiler that this must be called from a

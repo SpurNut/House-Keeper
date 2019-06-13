@@ -16,7 +16,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 import com.spurnut.housekeeper.tasksscreen.CreateTaskDialog
-
+import com.spurnut.housekeeper.database.viewmodel.HouseViewModel
 
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -116,17 +116,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
         when (item.itemId) {
-            R.id.nav_home -> {
-                // Handle the camera action
-            }
-            R.id.nav_gallery -> {
-
-            }
-            R.id.nav_slideshow -> {
-
-            }
-            R.id.nav_tools -> {
-
+            R.id.nav_add_house -> {
+                val dialogFragment = AddHouseDialog()
+                dialogFragment.show(supportFragmentManager, "Dialog")
             }
             R.id.nav_archive -> {
                 val dialogFragment = ArchiveDialog()
