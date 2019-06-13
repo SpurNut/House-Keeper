@@ -1,4 +1,4 @@
-package com.spurnut.housekeeper
+package com.spurnut.housekeeper.navigationdrawer
 
 import android.os.Bundle
 import android.view.ViewGroup
@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+import com.spurnut.housekeeper.R
 import com.spurnut.housekeeper.database.enity.Task
 import com.spurnut.housekeeper.database.viewmodel.ArchivedTaskViewModel
 import com.spurnut.housekeeper.tasksscreen.Callback

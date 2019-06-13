@@ -1,4 +1,4 @@
-package com.spurnut.housekeeper
+package com.spurnut.housekeeper.navigationdrawer
 
 import com.spurnut.housekeeper.tasksscreen.Callback
 import com.spurnut.housekeeper.tasksscreen.markdownHtmlFromText
@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.spurnut.housekeeper.database.enity.Task
 import android.content.Context
+import com.spurnut.housekeeper.R
 import kotlinx.android.synthetic.main.archive_task_view.view.*
 
 

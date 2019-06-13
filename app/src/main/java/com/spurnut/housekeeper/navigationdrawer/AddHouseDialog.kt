@@ -1,4 +1,4 @@
-package com.spurnut.housekeeper
+package com.spurnut.housekeeper.navigationdrawer
 
 import android.app.Dialog
 import android.content.DialogInterface
@@ -13,6 +13,7 @@ import androidx.annotation.NonNull
 import androidx.annotation.Nullable
 import androidx.appcompat.app.AlertDialog
 import com.google.android.material.textfield.TextInputEditText
+import com.spurnut.housekeeper.R
 import com.spurnut.housekeeper.database.enity.House
 
 

@@ -16,7 +16,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 import com.spurnut.housekeeper.tasksscreen.CreateTaskDialog
-import com.spurnut.housekeeper.database.viewmodel.HouseViewModel
+import com.spurnut.housekeeper.navigationdrawer.AddHouseDialog
+import com.spurnut.housekeeper.navigationdrawer.ArchiveDialog
 
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
