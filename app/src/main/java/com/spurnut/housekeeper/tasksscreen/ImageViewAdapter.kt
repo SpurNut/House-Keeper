@@ -1,10 +1,13 @@
 package com.spurnut.housekeeper.tasksscreen
 
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.drawable.BitmapDrawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.core.graphics.drawable.toDrawable
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.spurnut.housekeeper.R
@@ -26,7 +29,8 @@ class ImageViewAdapter(var imageDataSet: List<Bitmap>) :
 
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
 
-        holder.item.image_view_edit_image.setImageBitmap(imageDataSet[position])
+        val image = BitmapDrawable(holder.item.context!!.resources, imageDataSet[position])
+        holder.item.background = image
 
         if (position == 0) {
             val remove_button = holder.item.findViewById<Button>(R.id.remove_image)

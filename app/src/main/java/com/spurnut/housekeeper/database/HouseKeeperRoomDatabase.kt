@@ -7,14 +7,8 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.spurnut.housekeeper.converter.DateConverter
 import com.spurnut.housekeeper.converter.UrgencyImportantQuadrantConverter
-import com.spurnut.housekeeper.database.dao.HouseDao
-import com.spurnut.housekeeper.database.dao.TaskDao
-import com.spurnut.housekeeper.database.dao.TaskPhotoDao
-import com.spurnut.housekeeper.database.dao.UserDao
-import com.spurnut.housekeeper.database.enity.House
-import com.spurnut.housekeeper.database.enity.Task
-import com.spurnut.housekeeper.database.enity.TaskPhoto
-import com.spurnut.housekeeper.database.enity.User
+import com.spurnut.housekeeper.database.dao.*
+import com.spurnut.housekeeper.database.enity.*
 import kotlinx.coroutines.CoroutineScope
 
 @Database(entities = arrayOf(House::class, Task::class, TaskPhoto::class, User::class), version = 1)

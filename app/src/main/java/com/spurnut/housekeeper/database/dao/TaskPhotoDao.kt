@@ -5,7 +5,6 @@ import androidx.room.*
 import com.spurnut.housekeeper.database.enity.TaskPhoto
 
 @Dao
-
 interface TaskPhotoDao {
 
     @Query("SELECT * from task_photo WHERE task_id == :task_id")

@@ -1,30 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/image_card_view"
     android:layout_width="@dimen/image_box"
     android:layout_height="@dimen/image_box"
     android:layout_margin="-1dp"
-    android:padding="-1dp"
-    >
+    android:orientation="vertical"
+    android:padding="-1dp">
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/remove_image"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="@dimen/box_size"
         android:layout_height="@dimen/box_size"
-        android:layout_gravity="end|top"
-        android:background="@drawable/ic_remove_black_24dp" />
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <ImageView
-            android:id="@+id/image_view_edit_image"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:cropToPadding="true"
-            />
-    </RelativeLayout>
+        android:layout_gravity="end"
+        android:textColor="@color/colorAccent"
+        app:icon="@drawable/ic_remove_black_24dp" />
 
 
 </androidx.cardview.widget.CardView>

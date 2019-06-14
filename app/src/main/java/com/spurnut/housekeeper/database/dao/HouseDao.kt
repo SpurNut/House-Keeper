@@ -19,4 +19,7 @@ interface HouseDao {
 
     @Query("SELECT * from house_table")
     fun getAllHouses(): LiveData<List<House>>
+
+    @Query("SELECT * from house_table WHERE house_table.id == :house_id")
+    fun getHouseById(house_id: Int): LiveData<House>
 }

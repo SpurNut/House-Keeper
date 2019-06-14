@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="?android:attr/selectableItemBackground"
+    >
+
+
+    <TextView
+        android:id="@+id/assign_house_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="11dp"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/assign_house_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="18dp"
+        android:layout_below="@+id/assign_house_name"
+        android:layout_marginTop="11dp"
+        android:textSize="18sp" />
+
+    <View
+        android:id="@+id/assign_house_divider_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_below="@+id/assign_house_number"
+        android:layout_marginLeft="18dp"
+        android:layout_marginRight="18dp"
+        android:background="@color/colorAccent"
+        android:fadingEdge="vertical"
+        android:fadingEdgeLength="50dp"/>
+</RelativeLayout>

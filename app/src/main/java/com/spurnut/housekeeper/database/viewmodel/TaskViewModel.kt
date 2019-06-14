@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import com.spurnut.housekeeper.database.DataRepository
 import com.spurnut.housekeeper.database.HouseKeeperRoomDatabase
+import com.spurnut.housekeeper.database.enity.House
 import com.spurnut.housekeeper.database.enity.Task
 import com.spurnut.housekeeper.database.enity.TaskPhoto
 
@@ -38,5 +39,9 @@ class TaskViewModel(application: Application, val task_id: Int) : AndroidViewMod
 
     fun delete(taskPhoto: TaskPhoto) = viewModelScope.launch {
         repository.delete(taskPhoto)
+    }
+
+    fun getHouseById(house_id: Int) : LiveData<House> {
+        return repository.getHouseById(house_id)
     }
 }

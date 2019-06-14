@@ -23,7 +23,6 @@ import android.content.Context
 import android.os.Build
 import android.view.View
 import android.widget.Button
-import android.widget.EditText
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.snackbar.Snackbar
@@ -109,11 +108,28 @@ class TaskEditActivity : AppCompatActivity(), Callback<String, Int> {
         recyclerView.addItemDecoration(SpacesItemDecoration(spacingInPixels))
         imageViewAdapter.callback = this
 
+        val assignHouseButton = findViewById<Button>(R.id.button_assign_house)
+        assignHouseButton.setOnClickListener {
+            AssignHouseDialog(taskviewModel.task, taskviewModel).show(supportFragmentManager, "Dialog")
+        }
 
-        val applyButton = findViewById<Button>(R.id.button_close)
-        applyButton.setOnClickListener {
-            //ToDo db aufruf
-            onBackPressed()
+        val importanceButton = findViewById<Button>(R.id.button_importance)
+        importanceButton.setOnClickListener {
+            //ToDo Dialog and db call
+
+        };
+
+        val dueDateButton = findViewById<Button>(R.id.button_set_due_date)
+        dueDateButton.setOnClickListener {
+            //ToDo Dialog and db call
+
+        };
+
+
+        val reminderButton = findViewById<Button>(R.id.button_set_reminder)
+        reminderButton.setOnClickListener {
+            //ToDo Dialog and db call
+
         };
 
 
@@ -121,7 +137,7 @@ class TaskEditActivity : AppCompatActivity(), Callback<String, Int> {
 
     private fun setTask(task: Task) {
         findViewById<TextInputLayout>(R.id.text_input_title).editText?.setText(task.title)
-        findViewById<EditText>(R.id.editTextDescription).setText(task.description)
+        findViewById<TextInputLayout>(R.id.editTextDescription).editText?.setText(task.description)
     }
 
     private fun take_photo() {
@@ -220,7 +236,7 @@ class TaskEditActivity : AppCompatActivity(), Callback<String, Int> {
     }
 
     private fun updateTask() {
-        taskviewModel.update(Task(task_id, false, findViewById<TextInputLayout>(R.id.text_input_title).editText?.text.toString(), UrgencyImportantQuadrant.URGENT_NOT_IMPORTANT, findViewById<EditText>(R.id.editTextDescription).text.toString(), Date(1290213012)))
+        taskviewModel.update(Task(task_id, false, findViewById<TextInputLayout>(R.id.text_input_title).editText?.text.toString(), UrgencyImportantQuadrant.URGENT_NOT_IMPORTANT, findViewById<TextInputLayout>(R.id.editTextDescription).editText?.text.toString(), taskviewModel.task.value!!.houseId, Date(1290213012)))
     }
 
     private fun updateImageData(newData: List<Bitmap>) {

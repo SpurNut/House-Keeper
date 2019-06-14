@@ -25,8 +25,10 @@ class CreateTaskDialog : DialogFragment() {
                         // of the selected item
                         val intent = Intent(this.context, TaskEditActivity::class.java)
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                        val taskOverviewViewModel = ViewModelProviders.of(this).get(TaskOverviewViewModel::class.java)
-                        val task = Task(0, false, "", UrgencyImportantQuadrant.URGENT_IMPORTANT, "", Date(22005515))
+                        val taskOverviewViewModel = ViewModelProviders.of(this)
+                                .get(TaskOverviewViewModel::class.java)
+                        val task = Task(0, false, "",
+                                UrgencyImportantQuadrant.URGENT_IMPORTANT, "", null, Date(22005515))
                         val task_id = taskOverviewViewModel.insert(task)
                         if (which == 1) {
                             intent.putExtra("START_CAMERA", task_id)

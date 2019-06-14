@@ -118,7 +118,7 @@ class TaskViewAdapter :
 
         //description
         if (tasks[position].description != null) {
-            holder.item.task_description.text = markdownHtmlFromText("Description:\n" + tasks[position].description!!)
+            holder.item.task_description.text = markdownHtmlFromText("**Description:**\n" + tasks[position].description!!)
         }
 
 

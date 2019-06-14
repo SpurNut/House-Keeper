@@ -17,44 +17,49 @@
         android:id="@+id/task_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="11dp"
         android:layout_below="@+id/divider_top"
-        android:layout_toStartOf="@+id/button_open"
         android:layout_alignStart="@+id/divider_top"
+        android:layout_marginTop="11dp"
+        android:layout_toStartOf="@+id/button_open"
         android:textSize="21sp"
         android:textStyle="bold" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/button_open"
-        android:layout_width="wrap_content"
+        android:layout_width="110dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/divider_top"
         android:layout_alignEnd="@+id/divider_top"
-        android:textSize="12sp"
         android:layout_marginTop="8dp"
         android:layout_marginRight="-3dp"
-        android:minWidth="86dp"
-        android:minHeight="0dp"
-        android:text="Open" />
+        android:text="Open"
+        android:textSize="12sp" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/button_complete"
-        android:layout_width="wrap_content"
+        android:layout_width="110dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/button_open"
         android:layout_alignEnd="@+id/divider_top"
-        android:textSize="12sp"
         android:layout_marginRight="-3dp"
-        android:minWidth="0dp"
-        android:minHeight="0dp"
-        android:text="Complete" />
+        android:text="Complete"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/task_house"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/task_title"
+        android:layout_marginTop="56dp"
+        android:paddingLeft="18dp"
+        android:textSize="12sp" />
 
     <TextView
         android:id="@+id/task_urgency"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/task_house"
         android:layout_marginTop="56dp"
-        android:layout_below="@+id/task_title"
         android:paddingLeft="18dp"
         android:text="@string/important_urgent"
         android:textColor="@android:color/holo_red_dark"
@@ -65,8 +70,8 @@
         android:id="@+id/task_due_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/task_house"
         android:layout_marginTop="56dp"
-        android:layout_below="@+id/task_title"
         android:layout_toRightOf="@+id/task_urgency"
         android:paddingLeft="37dp"
         android:textColor="@android:color/black"

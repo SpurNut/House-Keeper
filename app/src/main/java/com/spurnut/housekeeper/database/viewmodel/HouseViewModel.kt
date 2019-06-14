@@ -7,18 +7,13 @@ import androidx.lifecycle.viewModelScope
 import com.spurnut.housekeeper.database.DataRepository
 import com.spurnut.housekeeper.database.HouseKeeperRoomDatabase
 import com.spurnut.housekeeper.database.enity.House
-import com.spurnut.housekeeper.database.enity.Task
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 class HouseViewModel (application: Application) : AndroidViewModel(application), CoroutineScope by MainScope() {
     val allHouses: LiveData<List<House>>
-    private val repository: DataRepository
+    private val repository = DataRepository(HouseKeeperRoomDatabase.getDatabase(application, viewModelScope))
 
     init {
-        repository = DataRepository(HouseKeeperRoomDatabase.getDatabase(application, viewModelScope))
         allHouses = repository.allHouses
     }
 

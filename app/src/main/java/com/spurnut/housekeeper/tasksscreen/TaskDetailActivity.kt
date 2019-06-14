@@ -16,13 +16,15 @@ import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.spurnut.housekeeper.database.enity.House
 import com.spurnut.housekeeper.database.enity.Task
 import com.spurnut.housekeeper.database.enity.TaskPhoto
 import com.spurnut.housekeeper.database.viewmodel.TaskViewModel
 import com.spurnut.housekeeper.database.viewmodel.TaskViewModelFactory
+import org.w3c.dom.Text
 
 
-class TaskDetailActivity : AppCompatActivity(), Callback<String,Boolean> {
+class TaskDetailActivity : AppCompatActivity(), Callback<String, Boolean> {
     override fun callbackCall(data: Map<String, Boolean>) {
         if (data.getOrElse("completed") { false }) {
             onBackPressed()
@@ -55,9 +57,13 @@ class TaskDetailActivity : AppCompatActivity(), Callback<String,Boolean> {
             val task = taskViewModel.task
             val taskPhoto = taskViewModel.images
 
-            task.observe(this, Observer { taski: Task ->
+            task.observe(this, Observer { observedTask: Task ->
                 // Update the cached copy of the words in the adapter.
-                setTasks(taski)
+                setTasks(observedTask)
+                if (observedTask.houseId != null) {
+                    taskViewModel.getHouseById(observedTask.houseId)
+                            .observe(this, Observer { house -> setHouse(house) })
+                }
             })
 
             taskPhoto.observe(this, Observer { photos ->
@@ -66,16 +72,24 @@ class TaskDetailActivity : AppCompatActivity(), Callback<String,Boolean> {
                     setPhotos(photos)
                 }
             })
+
+
         } else {
             taskViewModel = ViewModelProviders.of(this).get(TaskViewModel::class.java)
         }
 
     }
 
+    private fun setHouse(house: House?) {
+        val assignedHouse = findViewById<TextView>(R.id.detail_assigned_house) as TextView
+        val address = markdownHtmlFromText("**Location:** " + house!!.streetName + " " + house.streetNumber)
+        assignedHouse.text = address
+    }
+
     private fun setTasks(it: Task) {
         val title = findViewById<View>(R.id.detail_task_title) as TextView
         val description = findViewById<View>(R.id.detail_task_description) as TextView
-        val input = "Description:\n" + it.description
+        val input = "**Description:**\n" + it.description
 
         title.setText(markdownHtmlFromText(it.title))
         description.setText(markdownHtmlFromText(input))

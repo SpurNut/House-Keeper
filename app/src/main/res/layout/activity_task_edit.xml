@@ -11,39 +11,85 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view_edit_image"
             android:layout_width="match_parent"
-            android:layout_height="185dp"></androidx.recyclerview.widget.RecyclerView>
+            android:layout_height="185dp" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/text_input_title"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/recycler_view_edit_image">
+            android:layout_height="63dp"
+            android:layout_below="@+id/recycler_view_edit_image"
+            android:background="@android:color/white"
+            android:isScrollContainer="true">
 
             <com.google.android.material.textfield.TextInputEditText
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/task_title" />
+                android:background="@android:color/white"
+                android:hint="@string/task_title"
+                android:inputType="textShortMessage" />
         </com.google.android.material.textfield.TextInputLayout>
 
-
-        <EditText
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/editTextDescription"
             android:layout_width="match_parent"
             android:layout_height="320dp"
             android:layout_below="@+id/text_input_title"
-            android:gravity="start|top"
-            android:hint="@string/description"
-            android:inputType="textMultiLine" />
+            android:background="@android:color/white">
 
-        <Button
-            android:id="@+id/button_close"
+            <com.google.android.material.textfield.TextInputEditText
+
+                android:layout_width="match_parent"
+                android:layout_height="320dp"
+                android:background="@android:color/white"
+                android:gravity="start|top"
+                android:hint="@string/description"
+                android:inputType="textMultiLine"
+
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="160dp"
             android:layout_below="@id/editTextDescription"
-            android:layout_alignEnd="@+id/editTextDescription"
-            android:layout_margin="16dp"
-            android:text="@string/close" />
+            android:layout_centerHorizontal="true">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_assign_house"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Assign House"
+                android:textSize="12sp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_importance"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/button_assign_house"
+                android:text="Importance"
+                android:textSize="12sp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_set_due_date"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/button_importance"
+                android:text="Due Date"
+                android:textSize="12sp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_set_reminder"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/button_set_due_date"
+                android:text="Reminder"
+                android:textSize="12sp" />
+        </RelativeLayout>
 
     </RelativeLayout>
 

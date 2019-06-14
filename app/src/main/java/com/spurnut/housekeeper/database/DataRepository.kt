@@ -1,12 +1,7 @@
 package com.spurnut.housekeeper.database
 
 import androidx.lifecycle.LiveData
-import com.spurnut.housekeeper.database.enity.House
-import com.spurnut.housekeeper.database.enity.Task
-import com.spurnut.housekeeper.database.enity.TaskPhoto
-import com.spurnut.housekeeper.database.enity.User
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
+import com.spurnut.housekeeper.database.enity.*
 
 class DataRepository(val appDatabase: HouseKeeperRoomDatabase) {
 
@@ -69,5 +64,9 @@ class DataRepository(val appDatabase: HouseKeeperRoomDatabase) {
 
     fun deleteAllArchived() {
         appDatabase.taskDao().deleteAllArchived()
+    }
+
+    fun getHouseById(house_id: Int): LiveData<House> {
+        return appDatabase.houseDao().getHouseById(house_id)
     }
 }
