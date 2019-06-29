@@ -32,7 +32,7 @@
         android:layout_alignEnd="@+id/divider_top"
         android:layout_marginTop="8dp"
         android:layout_marginRight="-3dp"
-        android:text="Open"
+        android:text="@string/open"
         android:textSize="12sp" />
 
     <com.google.android.material.button.MaterialButton
@@ -42,7 +42,7 @@
         android:layout_below="@+id/button_open"
         android:layout_alignEnd="@+id/divider_top"
         android:layout_marginRight="-3dp"
-        android:text="Complete"
+        android:text="@string/complete"
         android:textSize="12sp" />
 
     <TextView
@@ -102,8 +102,8 @@
         android:minWidth="0dp"
         android:minHeight="0dp"
         android:textColor="@color/colorPrimary"
-        android:textOff="More"
-        android:textOn="Less"
+        android:textOff="@string/more"
+        android:textOn="@string/less"
         android:visibility="gone" />
 
     <View

@@ -39,8 +39,8 @@ class AddEditHouseDialog(val house: House?) : DialogFragment() {
         }
 
         dialogBuilder
-                .setNegativeButton("CANCEL") { dialog, _ -> dialog.dismiss() }
-                .setPositiveButton("OK") { _, _ ->
+                .setNegativeButton(getString(R.string.cancel)) { dialog, _ -> dialog.dismiss() }
+                .setPositiveButton(getString(R.string.ok)) { _, _ ->
                     if (house == null) {
                         houseViewModel.insert(
                                 House(0, inputStreetName!!.text.toString(),
@@ -57,7 +57,7 @@ class AddEditHouseDialog(val house: House?) : DialogFragment() {
         houseViewModel = ViewModelProviders.of(this).get(HouseViewModel::class.java)
 
         dialogBuilder = AlertDialog.Builder(context!!)
-                .setTitle("Add House")
+                .setTitle(getString(R.string.add_house))
 
         // call default fragment methods and set view for dialog
         val view = onCreateDialogView(activity!!.layoutInflater, null, null)

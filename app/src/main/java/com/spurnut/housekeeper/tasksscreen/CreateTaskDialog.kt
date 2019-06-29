@@ -31,13 +31,13 @@ class CreateTaskDialog : DialogFragment() {
                                 UrgencyImportantQuadrant.URGENT_IMPORTANT, "", null, Date(22005515))
                         val task_id = taskOverviewViewModel.insert(task)
                         if (which == 1) {
-                            intent.putExtra("START_CAMERA", task_id)
+                            intent.putExtra(getString(R.string.start_camera), task_id)
                         } else {
-                            intent.putExtra("TASK_FROM_TEXT", task_id)
+                            intent.putExtra(getString(R.string.task_from_text), task_id)
                         }
                         startActivity(intent)
                     }
             builder.create()
-        } ?: throw IllegalStateException("Activity cannot be null")
+        } ?: throw IllegalStateException(getString(R.string.activity_cant_be_null))
     }
 }

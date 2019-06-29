@@ -15,6 +15,7 @@ import android.widget.Button
 import android.content.ContentValues.TAG
 import android.content.Intent
 import android.util.Log
+import com.spurnut.housekeeper.markdown.markdownHtmlFromText
 
 
 class TaskViewAdapter :

@@ -3,16 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <item android:title="House">
+    <item android:title="@string/house">
         <menu>
             <item
                 android:id="@+id/nav_add_house"
                 android:icon="@drawable/ic_add_box_black_24dp"
-                android:title="Add House" />
+                android:title="@string/add_house" />
             <item
                 android:id="@+id/nav_edit_houses"
                 android:icon="@drawable/ic_mode_edit_black_24dp"
-                android:title="List/Edit Houses" />
+                android:title="@string/list_edit_houses" />
         </menu>
     </item>
 

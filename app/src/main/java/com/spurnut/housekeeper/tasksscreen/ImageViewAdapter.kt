@@ -52,13 +52,13 @@ class ImageViewAdapter(var imageDataSet: List<Bitmap>) :
 
         override fun onClick(v: View?) {
             if (!item.remove_image.isVisible) {
-                val callbackData = createCallbackData(key = "add", value = 1)
+                val callbackData = createCallbackData(key = item.context.getString(R.string.add), value = 1)
                 callback!!.callbackCall(data = callbackData)
             } else {
                 when (v!!.id) {
                     R.id.remove_image -> {
 
-                        val callbackData = createCallbackData(key = "remove", value = layoutPosition)
+                        val callbackData = createCallbackData(key = item.context.getString(R.string.remove), value = layoutPosition)
                         callback!!.callbackCall(data = callbackData)
                     }
                 }

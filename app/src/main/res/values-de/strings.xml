@@ -1,0 +1,41 @@
+<resources>
+    <string name="app_name">House Keeper</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="tasks">Aufgaben</string>
+    <string name="overview">Übersicht</string>
+    <string name="action_settings">Einstellungen</string>
+    <string name="menu_archive">Archiv</string>
+    <string name="due_on">Fällig am:</string>
+    <string name="edit">bearbeiten</string>
+    <string name="complete">Abschließen</string>
+    <string name="task_title">Titel</string>
+    <string name="description">Beschreibung</string>
+    <string name="create_task">Erstelle Aufgabe</string>
+    <string name="start_camera">Starte Kamera</string>
+    <string name="edit_existing_task">edit_existing_task</string>
+    <string name="question_complete_task">Aufgabe abschließen?</string>
+    <string name="cancel">abbrechen</string>
+    <string name="task">Aufgabe</string>
+    <string name="open">Öffnen</string>
+    <string name="more">Mehr</string>
+    <string name="less">Weniger</string>
+    <string name="assign_house">Haus zuweisen</string>
+    <string name="due_date">Fälligkeitsdatum</string>
+    <string name="reminder">Erinnerung</string>
+    <string name="street_name">Strassen Name</string>
+    <string name="street_number">Strassen Nummer</string>
+    <string name="delete_archive">Archiv löschen</string>
+    <string name="revive">Wiederaufnehmen</string>
+    <string name="houses">Häuser</string>
+    <string name="delete">Löschen</string>
+    <string name="ok">OK</string>
+    <string name="add_house">Haus hinzufügen</string>
+    <string name="location">**Ort:**</string>
+    <string name="image_removed">Bild entfernt</string>
+    <string name="undo">rückgängig machen</string>
+    <string name="list_edit_houses">Häuser anzeigen/bearbeiten</string>
+    <string name="house">Häuser</string>
+    <string name="tasks_bottom_nav">Aufgaben</string>
+    <string name="overview_bottom_nav">Übersicht</string>
+</resources>

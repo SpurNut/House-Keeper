@@ -3,12 +3,12 @@
 
     <item android:id="@+id/tasks"
         android:icon="@drawable/ic_business_center_black_24dp"
-        android:title="tasks"
+        android:title="@string/tasks_bottom_nav"
         />
 
     <item android:id="@+id/overview"
         android:icon="@drawable/ic_business_black_24dp"
-        android:title="overview"
+        android:title="@string/overview_bottom_nav"
         />
 
 

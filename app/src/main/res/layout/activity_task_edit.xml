@@ -60,7 +60,7 @@
                 style="@style/Widget.MaterialComponents.Button.TextButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Assign House"
+                android:text="@string/assign_house"
                 android:textSize="12sp" />
 
             <com.google.android.material.button.MaterialButton
@@ -78,7 +78,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@+id/button_importance"
-                android:text="Due Date"
+                android:text="@string/due_date"
                 android:textSize="12sp" />
 
             <com.google.android.material.button.MaterialButton
@@ -87,7 +87,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@+id/button_set_due_date"
-                android:text="Reminder"
+                android:text="@string/reminder"
                 android:textSize="12sp" />
         </RelativeLayout>
 

@@ -50,14 +50,14 @@ class TaskEditActivity : AppCompatActivity(), Callback<String, Int> {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        if (intent.hasExtra("edit_existing_task")) {
+        if (intent.hasExtra(getString(R.string.edit_existing_task))) {
             newTask = false
-            task_id = intent.getIntExtra("edit_existing_task", -1)
+            task_id = intent.getIntExtra(getString(R.string.edit_existing_task), -1)
         } else {
-            if (intent.hasExtra("START_CAMERA")) {
-                task_id = intent.getIntExtra("START_CAMERA", -1)
-            } else if (intent.hasExtra("TASK_FROM_TEXT")) {
-                task_id = intent.getIntExtra("TASK_FROM_TEXT", -1)
+            if (intent.hasExtra(getString(R.string.start_camera))) {
+                task_id = intent.getIntExtra(getString(R.string.start_camera), -1)
+            } else if (intent.hasExtra(getString(R.string.task_from_text))) {
+                task_id = intent.getIntExtra(getString(R.string.task_from_text), -1)
             }
         }
 
@@ -110,7 +110,7 @@ class TaskEditActivity : AppCompatActivity(), Callback<String, Int> {
 
         val assignHouseButton = findViewById<Button>(R.id.button_assign_house)
         assignHouseButton.setOnClickListener {
-            AssignHouseDialog(taskviewModel.task, taskviewModel).show(supportFragmentManager, "Dialog")
+            AssignHouseDialog(taskviewModel.task, taskviewModel).show(supportFragmentManager, getString(R.string.dialog))
         }
 
         val importanceButton = findViewById<Button>(R.id.button_importance)
@@ -218,18 +218,18 @@ class TaskEditActivity : AppCompatActivity(), Callback<String, Int> {
 
     override fun callbackCall(data: Map<String, Int>) {
 
-        if (data.containsKey("add")) {
+        if (data.containsKey(getString(R.string.add))) {
             take_photo()
-        } else if (data.containsKey("remove")) {
-            val imagePosition = data["remove"]!! - 1
+        } else if (data.containsKey(getString(R.string.remove))) {
+            val imagePosition = data[getString(R.string.remove)]!! - 1
             val id = taskviewModel.images.value!![imagePosition].taskId
             val filePath = taskviewModel.images.value!![imagePosition].uid
 
             taskviewModel.delete(taskviewModel.images.value!![imagePosition])
 
             val mySnackbar = Snackbar.make(findViewById(R.id.coordinator_edit),
-                    "Image removed", Snackbar.LENGTH_LONG)
-            mySnackbar.setAction("undo", MyUndoListener(filePath, id))
+                    getString(R.string.image_removed), Snackbar.LENGTH_LONG)
+            mySnackbar.setAction(getString(R.string.undo), MyUndoListener(filePath, id))
             mySnackbar.show()
 
         }

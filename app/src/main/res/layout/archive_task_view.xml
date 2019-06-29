@@ -34,7 +34,7 @@
         android:layout_marginRight="-3dp"
         android:minWidth="86dp"
         android:minHeight="0dp"
-        android:text="Revive" />
+        android:text="@string/revive" />
 
     <TextView
         android:id="@+id/archived_task_urgency"

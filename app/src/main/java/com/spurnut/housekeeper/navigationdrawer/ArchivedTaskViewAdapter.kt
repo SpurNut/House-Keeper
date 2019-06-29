@@ -1,7 +1,7 @@
 package com.spurnut.housekeeper.navigationdrawer
 
 import com.spurnut.housekeeper.tasksscreen.Callback
-import com.spurnut.housekeeper.tasksscreen.markdownHtmlFromText
+import com.spurnut.housekeeper.markdown.markdownHtmlFromText
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup

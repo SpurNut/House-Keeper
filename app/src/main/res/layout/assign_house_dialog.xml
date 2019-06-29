@@ -7,7 +7,7 @@
         android:id="@+id/assign_house_dialog_heading"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Assign House"
+        android:text="@string/assign_house"
         android:textAlignment="center"
         android:textSize="27sp" />
 

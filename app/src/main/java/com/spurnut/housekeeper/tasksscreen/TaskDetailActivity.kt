@@ -21,12 +21,12 @@ import com.spurnut.housekeeper.database.enity.Task
 import com.spurnut.housekeeper.database.enity.TaskPhoto
 import com.spurnut.housekeeper.database.viewmodel.TaskViewModel
 import com.spurnut.housekeeper.database.viewmodel.TaskViewModelFactory
-import org.w3c.dom.Text
+import com.spurnut.housekeeper.markdown.markdownHtmlFromText
 
 
 class TaskDetailActivity : AppCompatActivity(), Callback<String, Boolean> {
     override fun callbackCall(data: Map<String, Boolean>) {
-        if (data.getOrElse("completed") { false }) {
+        if (data.getOrElse(getString(R.string.completed)) { false }) {
             onBackPressed()
         }
     }
@@ -82,14 +82,14 @@ class TaskDetailActivity : AppCompatActivity(), Callback<String, Boolean> {
 
     private fun setHouse(house: House?) {
         val assignedHouse = findViewById<TextView>(R.id.detail_assigned_house) as TextView
-        val address = markdownHtmlFromText("**Location:** " + house!!.streetName + " " + house.streetNumber)
+        val address = markdownHtmlFromText(getString(R.string.location) + house!!.streetName + " " + house.streetNumber)
         assignedHouse.text = address
     }
 
     private fun setTasks(it: Task) {
         val title = findViewById<View>(R.id.detail_task_title) as TextView
         val description = findViewById<View>(R.id.detail_task_description) as TextView
-        val input = "**Description:**\n" + it.description
+        val input = "**" + getString(R.string.description) + ":**\n" + it.description
 
         title.setText(markdownHtmlFromText(it.title))
         description.setText(markdownHtmlFromText(input))

@@ -34,6 +34,6 @@ class CompleteAlertDialog(val viewModel: TViewModel, val task: Task) : DialogFra
                             })
             // Create the AlertDialog object and return it
             builder.create()
-        } ?: throw IllegalStateException("Activity cannot be null")
+        } ?: throw IllegalStateException(getString(R.string.activity_cant_be_null))
     }
 }
