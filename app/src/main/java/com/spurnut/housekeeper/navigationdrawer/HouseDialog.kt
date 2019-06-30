@@ -16,7 +16,7 @@ import com.spurnut.housekeeper.tasksscreen.Callback
 class HouseDialog : DialogFragment(), Callback<String, House> {
     override fun callbackCall(data: Map<String, House>) {
         if (data.contains("edit")) {
-            val dialogFragment = AddEditHouseDialog(data["edit"])
+            val dialogFragment = AddEditHouseDialog.newInstance(data["edit"])
             if (fragmentManager != null) {
                 dialogFragment.show(fragmentManager!!, "Dialog");
             }

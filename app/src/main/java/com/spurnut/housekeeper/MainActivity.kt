@@ -124,7 +124,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         // Handle navigation view item clicks here.
         when (item.itemId) {
             R.id.nav_add_house -> {
-                val dialogFragment = AddEditHouseDialog(null)
+                val dialogFragment = AddEditHouseDialog.newInstance(null)
                 dialogFragment.show(supportFragmentManager, "Dialog")
             }
             R.id.nav_edit_houses -> {

@@ -17,10 +17,28 @@ import com.spurnut.housekeeper.R
 import com.spurnut.housekeeper.database.enity.House
 
 
-class AddEditHouseDialog(val house: House?) : DialogFragment() {
+class AddEditHouseDialog : DialogFragment() {
 
     private lateinit var dialogBuilder: AlertDialog.Builder
     private lateinit var houseViewModel: HouseViewModel
+    private var house: House? = null
+
+    companion object {
+        fun newInstance(house: House?) = AddEditHouseDialog().apply {
+            val frag = AddEditHouseDialog()
+            if (house != null) {
+                frag.setHouse(house)
+            }
+            return frag
+        }
+    }
+
+
+
+    fun setHouse(house: House) {
+        this.house = house
+    }
+
 
     fun onCreateDialogView(inflater: LayoutInflater, @Nullable container: ViewGroup?, @Nullable savedInstanceState: Bundle?): View {
         return inflater.inflate(R.layout.add_house_dialog, container) // inflate here
@@ -34,8 +52,8 @@ class AddEditHouseDialog(val house: House?) : DialogFragment() {
         val inputStreetNumber = view.findViewById<TextInputEditText>(R.id.input_street_number)
 
         if (house != null) {
-            inputStreetName?.setText(house.streetName)
-            inputStreetNumber?.setText(house.streetNumber)
+            inputStreetName?.setText(house!!.streetName)
+            inputStreetNumber?.setText(house!!.streetNumber)
         }
 
         dialogBuilder
@@ -46,7 +64,7 @@ class AddEditHouseDialog(val house: House?) : DialogFragment() {
                                 House(0, inputStreetName!!.text.toString(),
                                         inputStreetNumber!!.text.toString()))
                     } else {
-                        houseViewModel.update(House(house.id, inputStreetName!!.text.toString(),
+                        houseViewModel.update(House(house!!.id, inputStreetName!!.text.toString(),
                                 inputStreetNumber!!.text.toString()))
                     }
                 }
