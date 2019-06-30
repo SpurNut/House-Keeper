@@ -110,6 +110,7 @@ class TaskEditActivity : AppCompatActivity(), Callback<String, Int> {
 
         val assignHouseButton = findViewById<Button>(R.id.button_assign_house)
         assignHouseButton.setOnClickListener {
+            updateTask()
             AssignHouseDialog(taskviewModel.task, taskviewModel).show(supportFragmentManager, getString(R.string.dialog))
         }
 

@@ -5,6 +5,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -13,6 +14,7 @@ import androidx.viewpager.widget.ViewPager
 import com.spurnut.housekeeper.R
 import kotlin.collections.ArrayList
 import androidx.appcompat.widget.Toolbar
+import androidx.core.text.toSpanned
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -82,17 +84,18 @@ class TaskDetailActivity : AppCompatActivity(), Callback<String, Boolean> {
 
     private fun setHouse(house: House?) {
         val assignedHouse = findViewById<TextView>(R.id.detail_assigned_house) as TextView
-        val address = markdownHtmlFromText(getString(R.string.location) + house!!.streetName + " " + house.streetNumber)
+        val address = TextUtils.concat(markdownHtmlFromText(getString(R.string.location)), (house?.streetName + " " + house?.streetNumber).toSpanned())
+
         assignedHouse.text = address
     }
 
     private fun setTasks(it: Task) {
         val title = findViewById<View>(R.id.detail_task_title) as TextView
         val description = findViewById<View>(R.id.detail_task_description) as TextView
-        val input = "**" + getString(R.string.description) + ":**\n" + it.description
+        val input = TextUtils.concat(markdownHtmlFromText("**" + getString(R.string.description) + ":**\n"), it.description!!.toSpanned())
 
-        title.setText(markdownHtmlFromText(it.title))
-        description.setText(markdownHtmlFromText(input))
+        title.setText(it.title)
+        description.setText(input)
 
     }
 

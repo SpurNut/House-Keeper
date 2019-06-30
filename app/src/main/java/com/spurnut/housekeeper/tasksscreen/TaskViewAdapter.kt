@@ -14,7 +14,9 @@ import android.view.ViewTreeObserver
 import android.widget.Button
 import android.content.ContentValues.TAG
 import android.content.Intent
+import android.text.TextUtils
 import android.util.Log
+import androidx.core.text.toSpanned
 import com.spurnut.housekeeper.markdown.markdownHtmlFromText
 
 
@@ -110,7 +112,7 @@ class TaskViewAdapter :
         // - replace the contents of the view with that element
 
         // title
-        holder.item.task_title.text = markdownHtmlFromText(tasks[position].title)
+        holder.item.task_title.text = tasks[position].title
 
         //due date
         if (tasks[position].dueDate != null)
@@ -120,7 +122,7 @@ class TaskViewAdapter :
 
         //description
         if (tasks[position].description != null) {
-            holder.item.task_description.text = markdownHtmlFromText("**Description:**\n" + tasks[position].description!!)
+            holder.item.task_description.text = TextUtils.concat(markdownHtmlFromText("**Description:**\n"), tasks[position].description!!.toSpanned())
             holder.item.task_description.textSize = descriptionTextSize.toFloat()
         }
 
