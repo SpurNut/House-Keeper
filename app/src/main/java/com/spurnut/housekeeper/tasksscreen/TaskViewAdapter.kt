@@ -23,6 +23,7 @@ class TaskViewAdapter :
 
     private var tasks = emptyList<Task>()
     var callback: Callback<String, Task>? = null
+    private var descriptionTextSize: Int = 12
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -120,6 +121,7 @@ class TaskViewAdapter :
         //description
         if (tasks[position].description != null) {
             holder.item.task_description.text = markdownHtmlFromText("**Description:**\n" + tasks[position].description!!)
+            holder.item.task_description.textSize = descriptionTextSize.toFloat()
         }
 
 
@@ -147,5 +149,10 @@ class TaskViewAdapter :
         this.tasks = tasks
         notifyDataSetChanged()
 
+    }
+
+    fun setDescriptionSize(size: Int) {
+        descriptionTextSize = size
+        notifyDataSetChanged()
     }
 }

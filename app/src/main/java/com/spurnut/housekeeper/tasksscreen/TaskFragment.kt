@@ -1,5 +1,6 @@
 package com.spurnut.housekeeper.tasksscreen
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.spurnut.housekeeper.R
 import com.spurnut.housekeeper.database.enity.Task
 import com.spurnut.housekeeper.database.viewmodel.TaskOverviewViewModel
+import com.spurnut.housekeeper.database.viewmodel.intLiveData
 
 class TaskFragment : Fragment(), Callback<String, Task> {
 
@@ -36,6 +38,13 @@ class TaskFragment : Fragment(), Callback<String, Task> {
             adapter = viewAdapter
         }
 
+        val sharedPref = this.context!!.getSharedPreferences(
+                this.context?.resources?.getString(R.string.user_config), Context.MODE_PRIVATE)
+
+        sharedPref!!.intLiveData(this.context!!.resources!!.getString(R.string.description_text_size), 12).observe(this, Observer { size ->
+            viewAdapter.setDescriptionSize(size)
+        })
+
         return view
     }
 
@@ -43,7 +52,7 @@ class TaskFragment : Fragment(), Callback<String, Task> {
 
         if (data.containsKey("complete")) {
 
-            val task = data["complete"]!!
+            val task = data["complete"] ?: error("empty map")
             taskOverviewViewModel
             val fragmentManager = fragmentManager!!
             val dialog = CompleteAlertDialog(taskOverviewViewModel, task)

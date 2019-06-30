@@ -62,4 +62,9 @@
     <string name="house">House</string>
     <string name="tasks_bottom_nav">tasks</string>
     <string name="overview_bottom_nav">overview</string>
+    <string name="description_text_small">Small</string>
+    <string name="description_text_normal">normal</string>
+    <string name="settings">Settings</string>
+    <string name="description_text_size">Description Text Size</string>
+    <string name="user_config">user_config</string>
 </resources>
