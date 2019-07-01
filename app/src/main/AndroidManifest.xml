@@ -22,7 +22,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SettingsActivity"></activity>
+        <activity android:name=".SettingsActivity" />
         <activity android:name=".tasksscreen.TaskDetailActivity" />
         <activity android:name=".tasksscreen.TaskEditActivity" />
 
@@ -35,6 +35,10 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
+
+        <receiver
+            android:name=".receiver.ReminderReceiver"
+            android:exported="false" />
     </application>
 
 </manifest>

@@ -1,6 +1,9 @@
 package com.spurnut.housekeeper.tasksscreen
 
 import android.app.Activity
+import android.app.AlarmManager
+import android.app.Dialog
+import android.app.PendingIntent
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -27,11 +30,13 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputLayout
+import com.spurnut.housekeeper.CustomDateTimePicker
 import com.spurnut.housekeeper.database.enity.Task
 import com.spurnut.housekeeper.database.enity.TaskPhoto
 import com.spurnut.housekeeper.database.enity.UrgencyImportantQuadrant
 import com.spurnut.housekeeper.database.viewmodel.TaskViewModel
 import com.spurnut.housekeeper.database.viewmodel.TaskViewModelFactory
+import com.spurnut.housekeeper.receiver.ReminderReceiver
 import java.util.*
 
 
@@ -44,6 +49,7 @@ class TaskEditActivity : AppCompatActivity(), Callback<String, Int> {
     var currentPhoto: String = ""
     val REQUEST_TAKE_PHOTO = 1
     private var images = listOf<Bitmap>()
+    private lateinit var customDateTimePicker: CustomDateTimePicker
 
     val imageViewAdapter: ImageViewAdapter = ImageViewAdapter(images)
 
@@ -82,6 +88,7 @@ class TaskEditActivity : AppCompatActivity(), Callback<String, Int> {
                     }
                 }
             }
+            createCustomDateTimePicker()
             updateImageData(newImages)
         })
 
@@ -129,11 +136,61 @@ class TaskEditActivity : AppCompatActivity(), Callback<String, Int> {
 
         val reminderButton = findViewById<Button>(R.id.button_set_reminder)
         reminderButton.setOnClickListener {
-            //ToDo Dialog and db call
+            updateTask()
 
+
+            customDateTimePicker.showDialog()
         };
 
 
+    }
+
+    private fun createCustomDateTimePicker() {
+        val listener = object : CustomDateTimePicker.ICustomDateTimeListener {
+
+
+            override fun onSet(dialog: Dialog, calendarSelected: Calendar,
+                               dateSelected: Date, year: Int, monthFullName: String,
+                               monthShortName: String, monthNumber: Int, day: Int,
+                               weekDayFullName: String, weekDayShortName: String, hour24: Int,
+                               hour12: Int, min: Int, sec: Int, AM_PM: String) {
+                //                        ((TextInputEditText) findViewById(R.id.edtEventDateTime))
+//                edtEventDateTime.setText("");
+//                edtEventDateTime.setText(year
+//                        + "-" + (monthNumber + 1) + "-" + calendarSelected.get(Calendar.DAY_OF_MONTH)
+//                        + " " + hour24 + ":" + min
+//                        + ":" + sec);
+
+                //will fire in 6 seconds
+                val reminder_time: Long = System.currentTimeMillis() + 6000L;
+
+                val am: AlarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager;
+                val intent = Intent(applicationContext, ReminderReceiver::class.java)
+                intent.putExtra("myAction", "mDoNotify");
+                val pendingIntent = PendingIntent.getBroadcast(applicationContext, 0, intent, 0);
+                am.set(AlarmManager.RTC_WAKEUP, reminder_time, pendingIntent);
+
+//                    ReminderReceiver().onReceive(applicationContext,null)
+            }
+
+
+            override fun onCancel() {
+
+            }
+        };
+
+
+        customDateTimePicker = CustomDateTimePicker(this, listener)
+
+        /**
+         * Pass Directly current time format it will return AM and PM if you set
+         * false
+         */
+        customDateTimePicker.set24HourFormat(true);
+//            /**
+//             * Pass Directly current data and time to show when it pop up
+//             */
+        customDateTimePicker.setDate(Calendar.getInstance());
     }
 
     private fun setTask(task: Task) {
@@ -253,5 +310,12 @@ class TaskEditActivity : AppCompatActivity(), Callback<String, Int> {
         }
 
     }
+
+
+    override fun onDestroy() {
+        super.onDestroy()
+        customDateTimePicker.dismiss()
+    }
+
 
 }
