@@ -23,8 +23,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".SettingsActivity" />
-        <activity android:name=".tasksscreen.TaskDetailActivity" />
-        <activity android:name=".tasksscreen.TaskEditActivity" />
+        <activity android:name=".tasksscreen.TaskDetailActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".tasksscreen.TaskEditActivity"
+            android:screenOrientation="portrait"/>
 
         <provider
             android:name="androidx.core.content.FileProvider"
