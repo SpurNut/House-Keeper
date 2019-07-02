@@ -78,6 +78,11 @@ class TaskEditActivity : AppCompatActivity(), Callback<String, Int> {
             // Update the cached copy of the task in the adapter.
             setTask(task)
             this.task = task
+            if (task.houseId != null) {
+                taskviewModel.getHouseById(task.houseId).observe(this, Observer {
+                    this.house = it
+                })
+            }
         })
 
         taskviewModel.images.observe(this, Observer { images_ ->
@@ -97,9 +102,7 @@ class TaskEditActivity : AppCompatActivity(), Callback<String, Int> {
             updateImageData(newImages)
         })
 
-        taskviewModel.getHouseById(task_id).observe(this, Observer {
-            this.house = it
-        })
+
 
 
         if (getIntent().hasExtra(getString(R.string.start_camera))) {
@@ -155,6 +158,8 @@ class TaskEditActivity : AppCompatActivity(), Callback<String, Int> {
 
                 if (house != null) {
                     intent.putExtra("house", house?.streetName + " " + house?.streetNumber)
+                } else {
+                    intent.putExtra("house", "")
                 }
                 intent.putExtra("taskTitle", task.title)
                 intent.putExtra("taskId", task.id)
