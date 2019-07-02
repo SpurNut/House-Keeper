@@ -9,6 +9,7 @@ import android.text.TextUtils
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.viewpager.widget.ViewPager
 import com.spurnut.housekeeper.R
@@ -24,6 +25,7 @@ import com.spurnut.housekeeper.database.enity.TaskPhoto
 import com.spurnut.housekeeper.database.viewmodel.TaskViewModel
 import com.spurnut.housekeeper.database.viewmodel.TaskViewModelFactory
 import com.spurnut.housekeeper.markdown.markdownHtmlFromText
+import java.util.*
 
 
 class TaskDetailActivity : AppCompatActivity(), Callback<String, Boolean> {
@@ -66,6 +68,12 @@ class TaskDetailActivity : AppCompatActivity(), Callback<String, Boolean> {
                     taskViewModel.getHouseById(observedTask.houseId)
                             .observe(this, Observer { house -> setHouse(house) })
                 }
+                if (observedTask.reminderDate != null) {
+                    setReminder(observedTask.reminderDate)
+                } else {
+                    val reminder_icon = findViewById(R.id.detail_task_reminder_icon) as ImageView
+                    reminder_icon.visibility = View.GONE
+                }
             })
 
             taskPhoto.observe(this, Observer { photos ->
@@ -82,8 +90,13 @@ class TaskDetailActivity : AppCompatActivity(), Callback<String, Boolean> {
 
     }
 
+    private fun setReminder(reminderDate: Date) {
+        val reminder = findViewById(R.id.detail_task_reminder) as TextView
+        reminder.text = reminderDate.toString()
+    }
+
     private fun setHouse(house: House?) {
-        val assignedHouse = findViewById<TextView>(R.id.detail_assigned_house) as TextView
+        val assignedHouse = findViewById(R.id.detail_assigned_house) as TextView
         val address = TextUtils.concat(markdownHtmlFromText(getString(R.string.location)), (house?.streetName + " " + house?.streetNumber).toSpanned())
 
         assignedHouse.text = address

@@ -114,11 +114,12 @@ class TaskViewAdapter :
         // title
         holder.item.task_title.text = tasks[position].title
 
-        //due date
-        if (tasks[position].dueDate != null)
-            holder.item.task_due_date.text = String.format("%s %s",
-                    mContext?.resources?.getString(R.string.due_on),
-                    tasks[position].dueDate.toString())
+        //reminder date
+        if (tasks[position].reminderDate != null)
+            holder.item.task_reminder.text = tasks[position].reminderDate.toString()
+        else {
+            holder.item.task_reminder_icon.visibility= View.GONE
+        }
 
         //description
         if (tasks[position].description != null) {

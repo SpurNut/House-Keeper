@@ -22,7 +22,7 @@ class AssignHouseDialog(val task_live: LiveData<Task>, val taskViewModel: TaskVi
 
     override fun callbackCall(data: Map<String, House>) {
         if (data.contains("assign")) {
-            taskViewModel.update(Task(task.id, task.completed, task.title, task.urgency, task.description, houseId = data["assign"]!!.id, dueDate = task.dueDate))
+            taskViewModel.update(Task(task.id, task.completed, task.title, task.description, houseId = data["assign"]!!.id, dueDate = task.dueDate, reminderDate = task.reminderDate))
             Toast.makeText(context,"Assigned House: " + data["assign"]?.streetName + " " + data["assign"]?.streetNumber, Toast.LENGTH_SHORT).show()
             this.dismiss()
         }

@@ -19,7 +19,7 @@ class ArchiveDialog : DialogFragment(), Callback<String, Task> {
     override fun callbackCall(data: Map<String, Task>) {
         if (data.contains("revive")) {
             val task = data["revive"]
-            archivedTaskViewModel.update(Task(id = task!!.id, completed = false, title = task.title, urgency = task.urgency, description = task.description, houseId = task.houseId, dueDate = task.dueDate))
+            archivedTaskViewModel.update(Task(id = task!!.id, completed = false, title = task.title, description = task.description, houseId = task.houseId, dueDate = task.dueDate, reminderDate = task.reminderDate))
         }
     }
 

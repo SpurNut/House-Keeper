@@ -20,8 +20,8 @@ data class Task(
         @PrimaryKey(autoGenerate = true) val id: Int,
         @ColumnInfo(name = "task_completed") val completed: Boolean,
         @ColumnInfo(name = "task_title") val title: String,
-        @ColumnInfo(name = "urgency") val urgency: UrgencyImportantQuadrant,
         @ColumnInfo(name = "description") val description: String?,
         @ColumnInfo(name = "house_id") val houseId: Int?,
-        @ColumnInfo(name = "dueDate") val dueDate: Date?)
+        @ColumnInfo(name = "dueDate") val dueDate: Date?,
+        @ColumnInfo(name = "reminderDate") val reminderDate: Date?)
 

@@ -48,13 +48,13 @@
                     android:id="@+id/detail_task_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="0dp"
-                    android:paddingLeft="14dp"
-                    android:paddingRight="14dp"
-                    android:paddingTop="0dp"
-                    android:paddingBottom="14dp"
                     android:layout_marginStart="8dp"
+                    android:layout_marginTop="0dp"
                     android:layout_marginBottom="0dp"
+                    android:paddingLeft="14dp"
+                    android:paddingTop="0dp"
+                    android:paddingRight="14dp"
+                    android:paddingBottom="14dp"
                     android:textSize="21sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -64,31 +64,33 @@
                     android:id="@+id/detail_assigned_house"
                     android:layout_width="wrap_content"
                     android:layout_height="35dp"
-                    android:paddingLeft="14dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="8dp"
+                    android:paddingStart="14dp"
+                    android:paddingEnd="14dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/detail_task_title" />
 
-                <TextView
-                    android:id="@+id/detail_task_urgency"
-                    android:layout_width="wrap_content"
-                    android:layout_height="35dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:text="Important + Urgent"
-                    android:textColor="@android:color/holo_red_dark"
-                    app:layout_constraintEnd_toStartOf="@+id/detail_task_due_date"
+                <ImageView
+                    android:id="@+id/detail_task_reminder_icon"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_marginStart="22dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="0dp"
+                    android:layout_marginBottom="22dp"
+                    android:paddingTop="0dp"
+                    android:src="@drawable/ic_alarm_black_24dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/detail_assigned_house" />
 
                 <TextView
-                    android:id="@+id/detail_task_due_date"
+                    android:id="@+id/detail_task_reminder"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="76dp"
-                    android:text="Due On: 06/07/2018"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="22dp"
+                    app:layout_constraintStart_toEndOf="@+id/detail_task_reminder_icon"
                     app:layout_constraintTop_toBottomOf="@+id/detail_assigned_house" />
 
                 <TextView
@@ -98,12 +100,12 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginBottom="100dp"
                     android:paddingLeft="14dp"
+                    android:paddingTop="0dp"
                     android:paddingRight="14dp"
                     android:paddingBottom="56dp"
-                    android:paddingTop="0dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/detail_task_urgency" />
+                    app:layout_constraintTop_toBottomOf="@+id/detail_task_reminder" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -111,11 +113,11 @@
 
         <com.google.android.material.bottomappbar.BottomAppBar
             android:id="@+id/bottomAppBar"
-            android:theme="@style/Theme.MaterialComponents"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:backgroundTint="@android:color/white"
+            android:theme="@style/Theme.MaterialComponents"
             app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior"
             app:layout_scrollFlags="scroll|enterAlways" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

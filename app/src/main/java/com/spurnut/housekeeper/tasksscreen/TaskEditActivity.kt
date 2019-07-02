@@ -160,7 +160,12 @@ class TaskEditActivity : AppCompatActivity(), Callback<String, Int> {
                 intent.putExtra("taskId", task.id)
                 val pendingIntent = PendingIntent.getBroadcast(applicationContext, task_id, intent, 0)
                 am.set(AlarmManager.RTC_WAKEUP, calendarSelected.timeInMillis, pendingIntent)
-                Toast.makeText(applicationContext,"Set Reminder: " + calendarSelected.time, Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext, "Set Reminder: " + calendarSelected.time, Toast.LENGTH_SHORT).show()
+                taskviewModel.update(Task(task_id, false, findViewById<TextInputLayout>(
+                        R.id.text_input_title).editText?.text.toString(),
+                        findViewById<TextInputLayout>(R.id.editTextDescription).editText?.text.toString(),
+                        taskviewModel.task.value!!.houseId, taskviewModel.task.value?.dueDate,
+                        calendarSelected.time))
             }
 
 
@@ -284,7 +289,11 @@ class TaskEditActivity : AppCompatActivity(), Callback<String, Int> {
     }
 
     private fun updateTask() {
-        taskviewModel.update(Task(task_id, false, findViewById<TextInputLayout>(R.id.text_input_title).editText?.text.toString(), UrgencyImportantQuadrant.URGENT_NOT_IMPORTANT, findViewById<TextInputLayout>(R.id.editTextDescription).editText?.text.toString(), taskviewModel.task.value!!.houseId, Date(1290213012)))
+        taskviewModel.update(Task(task_id, false, findViewById<TextInputLayout>(
+                R.id.text_input_title).editText?.text.toString(),
+                findViewById<TextInputLayout>(R.id.editTextDescription).editText?.text.toString(),
+                taskviewModel.task.value!!.houseId, taskviewModel.task.value?.dueDate,
+                taskviewModel.task.value?.reminderDate))
     }
 
     private fun updateImageData(newData: List<Bitmap>) {
