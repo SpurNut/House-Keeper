@@ -31,6 +31,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputLayout
 import com.spurnut.housekeeper.CustomDateTimePicker
+import com.spurnut.housekeeper.database.enity.House
 import com.spurnut.housekeeper.database.enity.Task
 import com.spurnut.housekeeper.database.enity.TaskPhoto
 import com.spurnut.housekeeper.database.enity.UrgencyImportantQuadrant
@@ -50,6 +51,8 @@ class TaskEditActivity : AppCompatActivity(), Callback<String, Int> {
     val REQUEST_TAKE_PHOTO = 1
     private var images = listOf<Bitmap>()
     private lateinit var customDateTimePicker: CustomDateTimePicker
+    private lateinit var task: Task
+    private var house: House? = null
 
     val imageViewAdapter: ImageViewAdapter = ImageViewAdapter(images)
 
@@ -73,6 +76,7 @@ class TaskEditActivity : AppCompatActivity(), Callback<String, Int> {
         taskviewModel.task.observe(this, Observer { task: Task ->
             // Update the cached copy of the task in the adapter.
             setTask(task)
+            this.task = task
         })
 
         taskviewModel.images.observe(this, Observer { images_ ->
@@ -90,6 +94,10 @@ class TaskEditActivity : AppCompatActivity(), Callback<String, Int> {
             }
             createCustomDateTimePicker()
             updateImageData(newImages)
+        })
+
+        taskviewModel.getHouseById(task_id).observe(this, Observer {
+            this.house = it
         })
 
 
@@ -154,23 +162,18 @@ class TaskEditActivity : AppCompatActivity(), Callback<String, Int> {
                                monthShortName: String, monthNumber: Int, day: Int,
                                weekDayFullName: String, weekDayShortName: String, hour24: Int,
                                hour12: Int, min: Int, sec: Int, AM_PM: String) {
-                //                        ((TextInputEditText) findViewById(R.id.edtEventDateTime))
-//                edtEventDateTime.setText("");
-//                edtEventDateTime.setText(year
-//                        + "-" + (monthNumber + 1) + "-" + calendarSelected.get(Calendar.DAY_OF_MONTH)
-//                        + " " + hour24 + ":" + min
-//                        + ":" + sec);
 
-                //will fire in 6 seconds
-                val reminder_time: Long = System.currentTimeMillis() + 6000L;
-
-                val am: AlarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager;
+                val am: AlarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
                 val intent = Intent(applicationContext, ReminderReceiver::class.java)
-                intent.putExtra("myAction", "mDoNotify");
-                val pendingIntent = PendingIntent.getBroadcast(applicationContext, 0, intent, 0);
-                am.set(AlarmManager.RTC_WAKEUP, reminder_time, pendingIntent);
 
-//                    ReminderReceiver().onReceive(applicationContext,null)
+
+                if (house != null) {
+                    intent.putExtra("house", house?.streetName + " " + house?.streetNumber)
+                }
+                intent.putExtra("taskTitle", task.title)
+                intent.putExtra("taskId", task.id)
+                val pendingIntent = PendingIntent.getBroadcast(applicationContext, task_id, intent, 0)
+                am.set(AlarmManager.RTC_WAKEUP, calendarSelected.timeInMillis, pendingIntent)
             }
 
 

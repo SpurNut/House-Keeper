@@ -17,26 +17,29 @@ import com.spurnut.housekeeper.R
 class ReminderReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent?) {
-        //you might want to check what's inside the Intent
-//        if (intent.getStringExtra("myAction") != null && intent.getStringExtra("myAction") == "notify") {
+
+        val house = intent?.getStringExtra(context.getString(R.string.house_intent_extra))
+        val taskTitle = intent?.getStringExtra(context.getString(R.string.task_title_intent_extra))
+        val taskId = intent?.getIntExtra("taskId",0)
 
         createNotificationChannel(context)
 
         val manager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
-        val builder = NotificationCompat.Builder(context,"13")
+        val builder = NotificationCompat.Builder(context,context.getString(R.string.channelId))
                 .setSmallIcon(R.drawable.ic_add_a_photo_black_24dp)
                 //example for large icon
                 .setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.mipmap.ic_launcher))
-                .setContentTitle("my title")
-                .setContentText("my message")
+                .setContentTitle(context.getString(R.string.task_reminder) + house)
+                .setContentText(taskTitle)
                 .setOngoing(false)
+                .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
                 .setPriority(NotificationCompat.VISIBILITY_PUBLIC)
                 .setAutoCancel(true)
         val i = Intent(context, MainActivity::class.java)
         val pendingIntent = PendingIntent.getActivity(
                 context,
-                0,
+                taskId!!,
                 i,
                 PendingIntent.FLAG_ONE_SHOT
         )
@@ -44,9 +47,7 @@ class ReminderReceiver : BroadcastReceiver() {
         builder.setLights(-0x48e3e4, 1000, 2000)
         builder.setSound(Uri.parse("android.resource://" + context.packageName + "/raw/hykenfreak__notification_chime.mp3"))
         builder.setContentIntent(pendingIntent)
-        manager.notify(12345, builder.build())
-//        }
-
+        manager.notify(taskId!!, builder.build())
     }
 
     private fun createNotificationChannel(context: Context) {
@@ -54,11 +55,11 @@ class ReminderReceiver : BroadcastReceiver() {
         // the NotificationChannel class is new and not in the support library
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 //            val name = context.getString(R.string.channel_name)
-            val name = "bla"
+            val name = "Task Reminder Channel"
 //            val descriptionText = context.getString(R.string.description_bla)
-            val descriptionText = "blabla"
+            val descriptionText = "Nofification Channel for reminding on doing tasks"
             val importance = NotificationManager.IMPORTANCE_HIGH
-            val channel = NotificationChannel("13", name, importance).apply {
+            val channel = NotificationChannel(context.getString(R.string.channelId), name, importance).apply {
                 description = descriptionText
             }
             // Register the channel with the system
