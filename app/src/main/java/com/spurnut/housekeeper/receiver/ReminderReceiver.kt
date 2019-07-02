@@ -12,6 +12,7 @@ import android.net.Uri
 import android.os.Build
 import com.spurnut.housekeeper.MainActivity
 import com.spurnut.housekeeper.R
+import com.spurnut.housekeeper.tasksscreen.TaskDetailActivity
 
 
 class ReminderReceiver : BroadcastReceiver() {
@@ -27,27 +28,28 @@ class ReminderReceiver : BroadcastReceiver() {
         val manager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
         val builder = NotificationCompat.Builder(context,context.getString(R.string.channelId))
-                .setSmallIcon(R.drawable.ic_add_a_photo_black_24dp)
+                .setSmallIcon(R.drawable.ic_alarm_black_24dp)
                 //example for large icon
                 .setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.mipmap.ic_launcher))
-                .setContentTitle(context.getString(R.string.task_reminder) + house)
+                .setContentTitle(context.getString(R.string.task_reminder) + " " + house)
                 .setContentText(taskTitle)
                 .setOngoing(false)
                 .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
                 .setPriority(NotificationCompat.VISIBILITY_PUBLIC)
                 .setAutoCancel(true)
-        val i = Intent(context, MainActivity::class.java)
+        val opening_intent = Intent(context, TaskDetailActivity::class.java)
+        opening_intent.putExtra("TASK_ID", taskId)
         val pendingIntent = PendingIntent.getActivity(
                 context,
                 taskId!!,
-                i,
+                opening_intent,
                 PendingIntent.FLAG_ONE_SHOT
         )
         // example for blinking LED
         builder.setLights(-0x48e3e4, 1000, 2000)
         builder.setSound(Uri.parse("android.resource://" + context.packageName + "/raw/hykenfreak__notification_chime.mp3"))
         builder.setContentIntent(pendingIntent)
-        manager.notify(taskId!!, builder.build())
+        manager.notify(taskId, builder.build())
     }
 
     private fun createNotificationChannel(context: Context) {
