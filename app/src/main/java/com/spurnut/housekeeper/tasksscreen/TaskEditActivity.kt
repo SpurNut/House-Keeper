@@ -26,6 +26,7 @@ import android.content.Context
 import android.os.Build
 import android.view.View
 import android.widget.Button
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.snackbar.Snackbar
@@ -129,19 +130,6 @@ class TaskEditActivity : AppCompatActivity(), Callback<String, Int> {
             AssignHouseDialog(taskviewModel.task, taskviewModel).show(supportFragmentManager, getString(R.string.dialog))
         }
 
-        val importanceButton = findViewById<Button>(R.id.button_importance)
-        importanceButton.setOnClickListener {
-            //ToDo Dialog and db call
-
-        };
-
-        val dueDateButton = findViewById<Button>(R.id.button_set_due_date)
-        dueDateButton.setOnClickListener {
-            //ToDo Dialog and db call
-
-        };
-
-
         val reminderButton = findViewById<Button>(R.id.button_set_reminder)
         reminderButton.setOnClickListener {
             updateTask()
@@ -149,8 +137,6 @@ class TaskEditActivity : AppCompatActivity(), Callback<String, Int> {
 
             customDateTimePicker.showDialog()
         };
-
-
     }
 
     private fun createCustomDateTimePicker() {
@@ -174,6 +160,7 @@ class TaskEditActivity : AppCompatActivity(), Callback<String, Int> {
                 intent.putExtra("taskId", task.id)
                 val pendingIntent = PendingIntent.getBroadcast(applicationContext, task_id, intent, 0)
                 am.set(AlarmManager.RTC_WAKEUP, calendarSelected.timeInMillis, pendingIntent)
+                Toast.makeText(applicationContext,"Set Reminder: " + calendarSelected.time, Toast.LENGTH_SHORT).show()
             }
 
 

@@ -50,7 +50,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <RelativeLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="160dp"
             android:layout_below="@id/editTextDescription"
             android:layout_centerHorizontal="true">
@@ -60,25 +60,8 @@
                 style="@style/Widget.MaterialComponents.Button.TextButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingRight="20dp"
                 android:text="@string/assign_house"
-                android:textSize="12sp" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/button_importance"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/button_assign_house"
-                android:text="Importance"
-                android:textSize="12sp" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/button_set_due_date"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/button_importance"
-                android:text="@string/due_date"
                 android:textSize="12sp" />
 
             <com.google.android.material.button.MaterialButton
@@ -86,7 +69,7 @@
                 style="@style/Widget.MaterialComponents.Button.TextButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/button_set_due_date"
+                android:layout_toRightOf="@+id/button_assign_house"
                 android:text="@string/reminder"
                 android:textSize="12sp" />
         </RelativeLayout>

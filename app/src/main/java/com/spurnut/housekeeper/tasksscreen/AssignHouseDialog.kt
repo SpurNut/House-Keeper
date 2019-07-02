@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
@@ -22,6 +23,7 @@ class AssignHouseDialog(val task_live: LiveData<Task>, val taskViewModel: TaskVi
     override fun callbackCall(data: Map<String, House>) {
         if (data.contains("assign")) {
             taskViewModel.update(Task(task.id, task.completed, task.title, task.urgency, task.description, houseId = data["assign"]!!.id, dueDate = task.dueDate))
+            Toast.makeText(context,"Assigned House: " + data["assign"]?.streetName + " " + data["assign"]?.streetNumber, Toast.LENGTH_SHORT).show()
             this.dismiss()
         }
     }
