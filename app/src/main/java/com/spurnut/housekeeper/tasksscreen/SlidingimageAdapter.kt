@@ -10,6 +10,7 @@ import android.widget.ImageView
 
 import androidx.viewpager.widget.PagerAdapter
 import com.spurnut.housekeeper.R
+import com.spurnut.housekeeper.converter.ImageScaling
 
 import java.util.ArrayList
 
@@ -33,7 +34,7 @@ class SlidingImageAdapter(context: Context, private val IMAGES: ArrayList<Bitmap
         val imageView = imageLayout.findViewById(R.id.image) as ImageView
 
 
-        imageView.setImageBitmap(IMAGES[position])
+        imageView.setImageBitmap(ImageScaling.getResizedBitmap(IMAGES[position],448))
 
         view.addView(imageLayout, 0)
 

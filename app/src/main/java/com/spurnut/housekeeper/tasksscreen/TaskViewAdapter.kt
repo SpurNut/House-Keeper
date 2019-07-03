@@ -17,6 +17,7 @@ import android.content.Intent
 import android.text.TextUtils
 import android.util.Log
 import androidx.core.text.toSpanned
+import com.spurnut.housekeeper.database.enity.House
 import com.spurnut.housekeeper.markdown.markdownHtmlFromText
 
 
@@ -24,6 +25,7 @@ class TaskViewAdapter :
         RecyclerView.Adapter<TaskViewAdapter.TaskViewHolder>() {
 
     private var tasks = emptyList<Task>()
+    private var houses = emptyList<House>()
     var callback: Callback<String, Task>? = null
     private var descriptionTextSize: Int = 12
 
@@ -45,10 +47,10 @@ class TaskViewAdapter :
                     }
                 }
                 R.id.button_open -> {
-                    val task_id = tasks[this.adapterPosition].id
+                    val taskId = tasks[this.adapterPosition].id
                     val intent = Intent(v.context, TaskDetailActivity::class.java)
 
-                    intent.putExtra("TASK_ID", task_id)
+                    intent.putExtra("TASK_ID", taskId)
                     v.context.startActivity(intent)
                 }
                 R.id.button_complete -> {
@@ -59,7 +61,7 @@ class TaskViewAdapter :
 
         private fun createCallbackData(key: String, value: Task): Map<String, Task> {
             val map: HashMap<String, Task> = HashMap()
-            map.put(key = key, value = value)
+            map[key] = value
             return map
         }
 
@@ -114,16 +116,37 @@ class TaskViewAdapter :
         // title
         holder.item.task_title.text = tasks[position].title
 
+        //assigned house
+        if (tasks[position].houseId != null) {
+            for (house: House in this.houses) {
+                if (house.id == tasks[position].houseId) {
+                    holder.item.task_assigned_house.text = TextUtils.concat(
+                            markdownHtmlFromText(mContext!!.getString(R.string.location)),
+                            "${house.streetName} ${house.streetNumber}".toSpanned())
+                }
+
+            }
+        } else {
+            val address = TextUtils.concat(markdownHtmlFromText(
+                    mContext!!.getString(R.string.location)),
+                    mContext!!.getString(R.string.no_location_assigned).toSpanned())
+            holder.item.task_assigned_house.text = address
+        }
+
         //reminder date
-        if (tasks[position].reminderDate != null)
+        if (tasks[position].reminderDate != null) {
             holder.item.task_reminder.text = tasks[position].reminderDate.toString()
-        else {
-            holder.item.task_reminder_icon.visibility= View.GONE
+            holder.item.task_reminder_icon.visibility = View.VISIBLE
+        } else {
+            holder.item.task_reminder.text = ""
+            holder.item.task_reminder_icon.visibility = View.GONE
         }
 
         //description
         if (tasks[position].description != null) {
-            holder.item.task_description.text = TextUtils.concat(markdownHtmlFromText("**Description:**\n"), tasks[position].description!!.toSpanned())
+            holder.item.task_description.text = TextUtils.concat(
+                    markdownHtmlFromText("**Description:**\n"),
+                    tasks[position].description!!.toSpanned())
             holder.item.task_description.textSize = descriptionTextSize.toFloat()
         }
 
@@ -133,7 +156,6 @@ class TaskViewAdapter :
                 object : ViewTreeObserver.OnPreDrawListener {
                     override fun onPreDraw(): Boolean {
                         holder.item.task_description.viewTreeObserver.removeOnPreDrawListener(this)
-                        holder.item.task_description.layout.getLineCount()
                         val linecount = holder.item.task_description.lineCount
                         if (holder.item.task_description.lineCount > 2) {
                             holder.item.task_description.setLines(2)
@@ -156,6 +178,11 @@ class TaskViewAdapter :
 
     fun setDescriptionSize(size: Int) {
         descriptionTextSize = size
+        notifyDataSetChanged()
+    }
+
+    fun addHouses(houses: List<House>) {
+        this.houses = houses
         notifyDataSetChanged()
     }
 }

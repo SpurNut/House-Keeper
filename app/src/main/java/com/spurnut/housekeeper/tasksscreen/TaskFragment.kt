@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.RecyclerView
 import com.spurnut.housekeeper.R
 import com.spurnut.housekeeper.database.enity.Task
+import com.spurnut.housekeeper.database.viewmodel.HouseViewModel
 import com.spurnut.housekeeper.database.viewmodel.TaskOverviewViewModel
 import com.spurnut.housekeeper.database.viewmodel.intLiveData
 
@@ -18,6 +19,7 @@ class TaskFragment : Fragment(), Callback<String, Task> {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var taskOverviewViewModel: TaskOverviewViewModel
+    private lateinit var houseViewModel: HouseViewModel
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -28,9 +30,16 @@ class TaskFragment : Fragment(), Callback<String, Task> {
         viewAdapter.callback = this
 
         taskOverviewViewModel = ViewModelProviders.of(this).get(TaskOverviewViewModel::class.java)
+        houseViewModel = ViewModelProviders.of(this).get(HouseViewModel::class.java)
         taskOverviewViewModel.allTasks.observe(this, Observer { tasks ->
             // Update the cached copy of the words in the adapter.
-            tasks?.let { viewAdapter.setTasks(it) }
+            tasks?.let {
+                viewAdapter.setTasks(it)
+            }
+        })
+
+        houseViewModel.allHouses.observe(this, Observer {
+            viewAdapter.addHouses(it)
         })
 
         recyclerView = view.findViewById<RecyclerView>(R.id.recycler_view_tasks_fragment).apply {

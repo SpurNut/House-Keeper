@@ -73,10 +73,11 @@ class TaskDetailActivity : AppCompatActivity(), Callback<String, Boolean> {
 
                     assignedHouse.text = address
                 }
+                val reminder_icon = findViewById(R.id.detail_task_reminder_icon) as ImageView
                 if (observedTask.reminderDate != null) {
                     setReminder(observedTask.reminderDate)
+                    reminder_icon.visibility = View.VISIBLE
                 } else {
-                    val reminder_icon = findViewById(R.id.detail_task_reminder_icon) as ImageView
                     reminder_icon.visibility = View.GONE
                 }
             })

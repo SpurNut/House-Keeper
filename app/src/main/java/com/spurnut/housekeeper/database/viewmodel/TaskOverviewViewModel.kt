@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import com.spurnut.housekeeper.database.DataRepository
 import com.spurnut.housekeeper.database.HouseKeeperRoomDatabase
+import com.spurnut.housekeeper.database.enity.House
 import com.spurnut.housekeeper.database.enity.Task
 import kotlinx.coroutines.*
 
@@ -29,6 +30,10 @@ class TaskOverviewViewModel (application: Application) : AndroidViewModel(applic
 
     override fun update(task: Task) = viewModelScope.launch {
         repository.update(task)
+    }
+
+    fun getHouseById(house_id: Int) : LiveData<House> {
+        return repository.getHouseById(house_id)
     }
 
 

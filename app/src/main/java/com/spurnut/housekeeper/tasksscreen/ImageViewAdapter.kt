@@ -7,10 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import androidx.core.graphics.drawable.toDrawable
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.spurnut.housekeeper.R
+import com.spurnut.housekeeper.converter.ImageScaling
 import kotlinx.android.synthetic.main.edit_image_layout.view.*
 
 
@@ -29,7 +29,8 @@ class ImageViewAdapter(var imageDataSet: List<Bitmap>) :
 
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
 
-        val image = BitmapDrawable(holder.item.context!!.resources, imageDataSet[position])
+        val image = BitmapDrawable(holder.item.context!!.resources,
+                ImageScaling.getResizedBitmap(imageDataSet[position], 256))
         holder.item.background = image
 
         if (position == 0) {

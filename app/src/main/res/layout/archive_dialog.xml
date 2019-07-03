@@ -43,7 +43,7 @@
             android:layout_gravity="bottom|center"
             android:layout_marginBottom="5dp"
             android:text="@string/delete_archive"
-            android:theme="@style/Theme.MaterialComponents" />
+            android:theme="@style/AppTheme" />
     </LinearLayout>
 
 

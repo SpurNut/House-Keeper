@@ -35,7 +35,6 @@ import com.spurnut.housekeeper.CustomDateTimePicker
 import com.spurnut.housekeeper.database.enity.House
 import com.spurnut.housekeeper.database.enity.Task
 import com.spurnut.housekeeper.database.enity.TaskPhoto
-import com.spurnut.housekeeper.database.enity.UrgencyImportantQuadrant
 import com.spurnut.housekeeper.database.viewmodel.TaskViewModel
 import com.spurnut.housekeeper.database.viewmodel.TaskViewModelFactory
 import com.spurnut.housekeeper.receiver.ReminderReceiver
@@ -105,7 +104,7 @@ class TaskEditActivity : AppCompatActivity(), Callback<String, Int> {
 
 
 
-        if (getIntent().hasExtra(getString(R.string.start_camera))) {
+        if (intent.hasExtra(getString(R.string.start_camera))) {
             take_photo()
         }
 
@@ -139,7 +138,7 @@ class TaskEditActivity : AppCompatActivity(), Callback<String, Int> {
 
 
             customDateTimePicker.showDialog()
-        };
+        }
     }
 
     private fun createCustomDateTimePicker() {
@@ -165,12 +164,16 @@ class TaskEditActivity : AppCompatActivity(), Callback<String, Int> {
                 intent.putExtra("taskId", task.id)
                 val pendingIntent = PendingIntent.getBroadcast(applicationContext, task_id, intent, 0)
                 am.set(AlarmManager.RTC_WAKEUP, calendarSelected.timeInMillis, pendingIntent)
-                Toast.makeText(applicationContext, "Set Reminder: " + calendarSelected.time, Toast.LENGTH_SHORT).show()
-                taskviewModel.update(Task(task_id, false, findViewById<TextInputLayout>(
-                        R.id.text_input_title).editText?.text.toString(),
-                        findViewById<TextInputLayout>(R.id.editTextDescription).editText?.text.toString(),
-                        taskviewModel.task.value!!.houseId, taskviewModel.task.value?.dueDate,
-                        calendarSelected.time))
+                Toast.makeText(applicationContext, "Set Reminder: " + calendarSelected.time,
+                        Toast.LENGTH_SHORT).show()
+                taskviewModel.update(Task(id = task_id, completed = false,
+                        title = findViewById<TextInputLayout>(
+                                R.id.text_input_title).editText?.text.toString(),
+                        description = findViewById<TextInputLayout>(
+                                R.id.editTextDescription).editText?.text.toString(),
+                        houseId = taskviewModel.task.value!!.houseId,
+                        dueDate = taskviewModel.task.value?.dueDate,
+                        reminderDate = calendarSelected.time))
             }
 
 
@@ -294,11 +297,14 @@ class TaskEditActivity : AppCompatActivity(), Callback<String, Int> {
     }
 
     private fun updateTask() {
-        taskviewModel.update(Task(task_id, false, findViewById<TextInputLayout>(
-                R.id.text_input_title).editText?.text.toString(),
-                findViewById<TextInputLayout>(R.id.editTextDescription).editText?.text.toString(),
-                taskviewModel.task.value!!.houseId, taskviewModel.task.value?.dueDate,
-                taskviewModel.task.value?.reminderDate))
+        taskviewModel.update(Task(id = task_id, completed = false,
+                title = findViewById<TextInputLayout>(
+                        R.id.text_input_title).editText?.text.toString(),
+                description = findViewById<TextInputLayout>(
+                        R.id.editTextDescription).editText?.text.toString(),
+                houseId = taskviewModel.task.value!!.houseId,
+                dueDate = taskviewModel.task.value?.dueDate,
+                reminderDate = taskviewModel.task.value?.reminderDate))
     }
 
     private fun updateImageData(newData: List<Bitmap>) {

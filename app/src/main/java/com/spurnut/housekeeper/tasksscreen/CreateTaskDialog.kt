@@ -27,7 +27,8 @@ class CreateTaskDialog : DialogFragment() {
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                         val taskOverviewViewModel = ViewModelProviders.of(this)
                                 .get(TaskOverviewViewModel::class.java)
-                        val task = Task(0, false, "", "", null, null, null)
+                        val task = Task(id = 0, completed = false, title = "", description = "",
+                                houseId = null, dueDate = null, reminderDate = null)
                         val task_id = taskOverviewViewModel.insert(task)
                         if (which == 1) {
                             intent.putExtra(getString(R.string.start_camera), task_id)
