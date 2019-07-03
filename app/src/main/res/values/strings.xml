@@ -71,4 +71,5 @@
     <string name="house_intent_extra">house</string>
     <string name="task_title_intent_extra">taskTitle</string>
     <string name="channelId">13</string>
+    <string name="no_location_assigned">No Location assigned.</string>
 </resources>

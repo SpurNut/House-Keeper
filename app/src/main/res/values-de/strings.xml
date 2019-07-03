@@ -44,4 +44,5 @@
     <string name="description_text_size">Description Text Size</string>
     <string name="user_config">user_config</string>
     <string name="task_reminder">Task Reminder:</string>
+    <string name="no_location_assigned">No Location assigned.</string>
 </resources>

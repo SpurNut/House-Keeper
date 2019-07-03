@@ -67,6 +67,11 @@ class TaskDetailActivity : AppCompatActivity(), Callback<String, Boolean> {
                 if (observedTask.houseId != null) {
                     taskViewModel.getHouseById(observedTask.houseId)
                             .observe(this, Observer { house -> setHouse(house) })
+                } else {
+                    val assignedHouse = findViewById(R.id.detail_assigned_house) as TextView
+                    val address = TextUtils.concat(markdownHtmlFromText(getString(R.string.location)), getString(R.string.no_location_assigned).toSpanned())
+
+                    assignedHouse.text = address
                 }
                 if (observedTask.reminderDate != null) {
                     setReminder(observedTask.reminderDate)

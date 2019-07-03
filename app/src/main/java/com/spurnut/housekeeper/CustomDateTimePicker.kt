@@ -151,8 +151,8 @@ class CustomDateTimePicker(private val activity: Activity,
             selectedMinute = calendar_date!!.get(Calendar.MINUTE)
 
             timePicker!!.setIs24HourView(is24HourView)
-            timePicker!!.currentHour = selectedHour
-            timePicker!!.currentMinute = selectedMinute
+            timePicker!!.hour = selectedHour
+            timePicker!!.minute = selectedMinute
 
             datePicker!!.updateDate(calendar_date!!.get(Calendar.YEAR),
                     calendar_date!!.get(Calendar.MONTH),
