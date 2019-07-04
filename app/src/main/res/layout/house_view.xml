@@ -7,8 +7,8 @@
         android:id="@+id/house_divider_top"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginLeft="18dp"
-        android:layout_marginRight="18dp"
+        android:layout_marginLeft="@dimen/dp_18"
+        android:layout_marginRight="@dimen/dp_18"
         android:background="?android:attr/listDivider" />
 
     <TextView
@@ -61,9 +61,9 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_below="@+id/house_number"
-        android:layout_marginLeft="18dp"
-        android:layout_marginRight="18dp"
+        android:layout_marginLeft="@dimen/dp_18"
+        android:layout_marginRight="@dimen/dp_18"
         android:background="?android:attr/listDivider"
         android:fadingEdge="vertical"
-        android:fadingEdgeLength="50dp" />
+        android:fadingEdgeLength="@dimen/dp_50" />
 </RelativeLayout>

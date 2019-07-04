@@ -9,17 +9,17 @@
         android:layout_height="wrap_content"
         android:text="@string/assign_house"
         android:textAlignment="center"
-        android:textSize="27sp" />
+        android:textSize="@dimen/sp_27" />
 
     <View
         android:id="@+id/assign_house_top_divider"
         android:layout_width="match_parent"
-        android:layout_height="3dp"
+        android:layout_height="@dimen/dp_3"
         android:layout_below="@+id/assign_house_dialog_heading"
-        android:layout_marginLeft="18dp"
-        android:layout_marginRight="18dp"
+        android:layout_marginLeft="@dimen/dp_18"
+        android:layout_marginRight="@dimen/dp_18"
         android:background="@color/colorAccent"
-        android:fadingEdgeLength="50dp" />
+        android:fadingEdgeLength="@dimen/dp_50" />
 
     <androidx.recyclerview.widget.RecyclerView xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"

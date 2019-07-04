@@ -52,9 +52,10 @@ class TaskDetailActivity : AppCompatActivity(), Callback<String, Boolean> {
     private fun init() {
 
 
-        if (getIntent().hasExtra("TASK_ID")) {
+        if (getIntent().hasExtra(applicationContext.getString(R.string.task_id_detail_activity))) {
 
-            task_id = getIntent().getIntExtra("TASK_ID", 0)
+            task_id = getIntent().getIntExtra(applicationContext.getString(
+                    R.string.task_id_detail_activity), 0)
             val factory = TaskViewModelFactory(application, task_id)
             taskViewModel = ViewModelProviders.of(this, factory).get(TaskViewModel::class.java)
 
@@ -69,7 +70,8 @@ class TaskDetailActivity : AppCompatActivity(), Callback<String, Boolean> {
                             .observe(this, Observer { house -> setHouse(house) })
                 } else {
                     val assignedHouse = findViewById(R.id.detail_assigned_house) as TextView
-                    val address = TextUtils.concat(markdownHtmlFromText(getString(R.string.location)), getString(R.string.no_location_assigned).toSpanned())
+                    val address = TextUtils.concat(markdownHtmlFromText(getString(R.string.location)),
+                            getString(R.string.no_location_assigned).toSpanned())
 
                     assignedHouse.text = address
                 }
@@ -103,7 +105,8 @@ class TaskDetailActivity : AppCompatActivity(), Callback<String, Boolean> {
 
     private fun setHouse(house: House?) {
         val assignedHouse = findViewById(R.id.detail_assigned_house) as TextView
-        val address = TextUtils.concat(markdownHtmlFromText(getString(R.string.location)), (house?.streetName + " " + house?.streetNumber).toSpanned())
+        val address = TextUtils.concat(markdownHtmlFromText(getString(R.string.location)),
+                (house?.streetName + " " + house?.streetNumber).toSpanned())
 
         assignedHouse.text = address
     }
@@ -111,7 +114,8 @@ class TaskDetailActivity : AppCompatActivity(), Callback<String, Boolean> {
     private fun setTasks(it: Task) {
         val title = findViewById<View>(R.id.detail_task_title) as TextView
         val description = findViewById<View>(R.id.detail_task_description) as TextView
-        val input = TextUtils.concat(markdownHtmlFromText("**" + getString(R.string.description) + ":**\n"), it.description!!.toSpanned())
+        val input = TextUtils.concat(markdownHtmlFromText("**" + getString(R.string.description) + ":**\n"),
+                it.description!!.toSpanned())
 
         title.setText(it.title)
         description.setText(input)

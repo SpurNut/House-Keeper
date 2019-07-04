@@ -30,9 +30,8 @@ class HouseViewAdapter(val houseViewModel: HouseViewModel) :
 
             when (v.id) {
                 R.id.button_edit -> {
-                    //Todo open edit house dialog
                     val map = HashMap<String,House>()
-                    map.put("edit",houses[adapterPosition])
+                    map.put(mContext!!.getString(R.string.access_edit),houses[adapterPosition])
                     callBack!!.callbackCall(map)
                 }
                 R.id.button_delete -> {

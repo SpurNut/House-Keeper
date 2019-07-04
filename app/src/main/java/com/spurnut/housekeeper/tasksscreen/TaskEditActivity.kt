@@ -156,15 +156,18 @@ class TaskEditActivity : AppCompatActivity(), Callback<String, Int> {
 
 
                 if (house != null) {
-                    intent.putExtra("house", house?.streetName + " " + house?.streetNumber)
+                    intent.putExtra(applicationContext.getString(R.string.access_house),
+                            house?.streetName + " " + house?.streetNumber)
                 } else {
-                    intent.putExtra("house", "")
+                    intent.putExtra(applicationContext.getString(R.string.access_house), "")
                 }
-                intent.putExtra("taskTitle", task.title)
-                intent.putExtra("taskId", task.id)
-                val pendingIntent = PendingIntent.getBroadcast(applicationContext, task_id, intent, 0)
+                intent.putExtra(applicationContext.getString(R.string.taskTitle), task.title)
+                intent.putExtra(applicationContext.getString(R.string.taskId), task.id)
+                val pendingIntent = PendingIntent.getBroadcast(applicationContext, task_id,
+                        intent, 0)
                 am.set(AlarmManager.RTC_WAKEUP, calendarSelected.timeInMillis, pendingIntent)
-                Toast.makeText(applicationContext, "Set Reminder: " + calendarSelected.time,
+                Toast.makeText(applicationContext, getString(R.string.set_reminder)
+                        + calendarSelected.time,
                         Toast.LENGTH_SHORT).show()
                 taskviewModel.update(Task(id = task_id, completed = false,
                         title = findViewById<TextInputLayout>(

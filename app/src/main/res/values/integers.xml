@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="minus_one">-1</integer>
+    <integer name="zero">0</integer>
+    <integer name="one">1</integer>
+    <integer name="two">2</integer>
+    <integer name="three">3</integer>
+    <integer name="four">4</integer>
+    <integer name="sixteen">16</integer>
+    <integer name="one_hundred">100</integer>
+    <integer name="one_hundred_one">101</integer>
+    <integer name="one_hundred_two">102</integer>
+    <integer name="one_hundred_three">103</integer>
+    <integer name="two_hundred_fifty_six">256</integer>
+    <integer name="one_thousand">1000</integer>
+    <integer name="two_thousand">2000</integer>
+    <integer name="max_size_image">448</integer>
+    <integer name="twelve">12</integer>
+</resources>

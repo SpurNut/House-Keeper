@@ -59,9 +59,10 @@ class TaskFragment : Fragment(), Callback<String, Task> {
 
     override fun callbackCall(data: Map<String, Task>) {
 
-        if (data.containsKey("complete")) {
+        if (data.containsKey(context!!.getString(R.string.access_complete))) {
 
-            val task = data["complete"] ?: error("empty map")
+            val task = data[context!!.getString(R.string.access_complete)]
+                    ?: error(context!!.getString(R.string.error_map))
             taskOverviewViewModel
             val fragmentManager = fragmentManager!!
             val dialog = CompleteAlertDialog(taskOverviewViewModel, task)

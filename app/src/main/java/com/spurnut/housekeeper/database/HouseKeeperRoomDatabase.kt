@@ -5,6 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import com.spurnut.housekeeper.R
 import com.spurnut.housekeeper.converter.DateConverter
 import com.spurnut.housekeeper.converter.UrgencyImportantQuadrantConverter
 import com.spurnut.housekeeper.database.dao.*
@@ -32,7 +33,7 @@ abstract class HouseKeeperRoomDatabase : RoomDatabase() {
                 val instance = Room.databaseBuilder(
                         context.applicationContext,
                         HouseKeeperRoomDatabase::class.java,
-                        "House_Keeper_database"
+                        context.getString(R.string.house_keeper_database)
                 )
                         // Wipes and rebuilds instead of migrating if no Migration object.
                         // Migration is not part of this codelab.

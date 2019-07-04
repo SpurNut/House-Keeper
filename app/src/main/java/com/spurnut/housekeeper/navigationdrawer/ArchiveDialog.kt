@@ -17,9 +17,11 @@ import com.spurnut.housekeeper.tasksscreen.Callback
 
 class ArchiveDialog : DialogFragment(), Callback<String, Task> {
     override fun callbackCall(data: Map<String, Task>) {
-        if (data.contains("revive")) {
-            val task = data["revive"]
-            archivedTaskViewModel.update(Task(id = task!!.id, completed = false, title = task.title, description = task.description, houseId = task.houseId, dueDate = task.dueDate, reminderDate = task.reminderDate))
+        if (data.contains(context!!.getString(R.string.access_revive))) {
+            val task = data[context!!.getString(R.string.access_revive)]
+            archivedTaskViewModel.update(Task(id = task!!.id, completed = false, title = task.title,
+                    description = task.description, houseId = task.houseId, dueDate = task.dueDate,
+                    reminderDate = task.reminderDate))
         }
     }
 

@@ -17,13 +17,19 @@ import com.spurnut.housekeeper.database.enity.Task
 import com.spurnut.housekeeper.database.viewmodel.HouseViewModel
 import com.spurnut.housekeeper.database.viewmodel.TaskViewModel
 
-class AssignHouseDialog(val task_live: LiveData<Task>, val taskViewModel: TaskViewModel) : DialogFragment(), Callback<String, House> {
+class AssignHouseDialog(val task_live: LiveData<Task>, val taskViewModel: TaskViewModel) :
+        DialogFragment(), Callback<String, House> {
     lateinit var task: Task
 
     override fun callbackCall(data: Map<String, House>) {
-        if (data.contains("assign")) {
-            taskViewModel.update(Task(task.id, task.completed, task.title, task.description, houseId = data["assign"]!!.id, dueDate = task.dueDate, reminderDate = task.reminderDate))
-            Toast.makeText(context,"Assigned House: " + data["assign"]?.streetName + " " + data["assign"]?.streetNumber, Toast.LENGTH_SHORT).show()
+        if (data.contains(context!!.getString(R.string.access_assign))) {
+            taskViewModel.update(Task(task.id, task.completed, task.title, task.description,
+                    houseId = data[context!!.getString(R.string.access_assign)]!!.id,
+                    dueDate = task.dueDate, reminderDate = task.reminderDate))
+            Toast.makeText(context, getString(R.string.assigned_house)
+                    + data[context!!.getString(R.string.access_assign)]?.streetName + " "
+                    + data[context!!.getString(R.string.access_assign)]?.streetNumber,
+                    Toast.LENGTH_SHORT).show()
             this.dismiss()
         }
     }
@@ -62,12 +68,5 @@ class AssignHouseDialog(val task_live: LiveData<Task>, val taskViewModel: TaskVi
         })
 
         return view
-    }
-
-    override fun onResume() {
-//        val dialogHeight = MainActivity.displayMetrics.heightPixels - margin * 2 - MainActivity.StatusBarHeight
-//        val dialogWidth = MainActivity.displayMetrics.widthPixels - margin * 2
-//        dialog?.window?.setLayout(dialogWidth, dialogHeight)
-        super.onResume()
     }
 }

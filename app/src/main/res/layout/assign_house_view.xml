@@ -10,27 +10,27 @@
         android:id="@+id/assign_house_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="18dp"
-        android:layout_marginTop="11dp"
-        android:textSize="18sp" />
+        android:layout_marginStart="@dimen/dp_18"
+        android:layout_marginTop="@dimen/dp_11"
+        android:textSize="@dimen/sp_12" />
 
     <TextView
         android:id="@+id/assign_house_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="18dp"
+        android:layout_marginStart="@dimen/dp_18"
         android:layout_below="@+id/assign_house_name"
-        android:layout_marginTop="11dp"
-        android:textSize="18sp" />
+        android:layout_marginTop="@dimen/dp_11"
+        android:textSize="@dimen/sp_18" />
 
     <View
         android:id="@+id/assign_house_divider_bottom"
         android:layout_width="match_parent"
-        android:layout_height="2dp"
+        android:layout_height="@dimen/dp_2"
         android:layout_below="@+id/assign_house_number"
-        android:layout_marginLeft="18dp"
-        android:layout_marginRight="18dp"
+        android:layout_marginLeft="@dimen/dp_18"
+        android:layout_marginRight="@dimen/dp_18"
         android:background="@color/colorAccent"
         android:fadingEdge="vertical"
-        android:fadingEdgeLength="50dp"/>
+        android:fadingEdgeLength="@dimen/dp_50"/>
 </RelativeLayout>

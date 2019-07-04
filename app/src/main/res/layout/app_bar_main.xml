@@ -30,7 +30,7 @@
         app:fabSize="mini"
         android:layout_marginEnd="@dimen/fab_margin_side"
         android:layout_marginBottom="@dimen/fab_margin_bottom"
-        app:maxImageSize="32dp"
+        app:maxImageSize="@dimen/dp_32"
         android:backgroundTint="@android:color/holo_red_light"
         app:srcCompat="@android:drawable/ic_input_add" />
 

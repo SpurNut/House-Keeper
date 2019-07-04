@@ -9,17 +9,17 @@
         android:layout_height="wrap_content"
         android:text="@string/menu_archive"
         android:textAlignment="center"
-        android:textSize="27sp" />
+        android:textSize="@dimen/sp_27" />
 
     <View
         android:id="@+id/archive_top_divider"
         android:layout_width="match_parent"
-        android:layout_height="3dp"
+        android:layout_height="@dimen/dp_3"
         android:layout_below="@+id/archive_heading"
-        android:layout_marginLeft="18dp"
-        android:layout_marginRight="18dp"
+        android:layout_marginLeft="@dimen/dp_18"
+        android:layout_marginRight="@dimen/dp_18"
         android:background="?android:attr/listDivider"
-        android:fadingEdgeLength="50dp" />
+        android:fadingEdgeLength="@dimen/dp_50" />
 
     <androidx.recyclerview.widget.RecyclerView xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
@@ -27,7 +27,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/archive_top_divider"
-        android:layout_marginBottom="57dp"
+        android:layout_marginBottom="@dimen/dp_57"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/archive_task_view" />
 
@@ -41,7 +41,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center"
-            android:layout_marginBottom="5dp"
+            android:layout_marginBottom="@dimen/dp_5"
             android:text="@string/delete_archive"
             android:theme="@style/AppTheme" />
     </LinearLayout>

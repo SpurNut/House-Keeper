@@ -32,8 +32,7 @@ class AssignHouseViewAdapter(val houseViewModel: HouseViewModel) :
             when (v.id) {
                 v.id -> {
                     val map = HashMap<String, House>()
-                    map.put("assign", houses[adapterPosition])
-                    Log.i("Clicked", "House")
+                    map.put(v.context!!.getString(R.string.access_assign), houses[adapterPosition])
                     callBack!!.callbackCall(map)
                     assignedHouse = houses[adapterPosition]
                     notifyDataSetChanged()
@@ -55,10 +54,10 @@ class AssignHouseViewAdapter(val houseViewModel: HouseViewModel) :
 
         mContext = parent.context
         // create a new view
-        val layoutinflater = LayoutInflater.from(parent.context)
+        val layoutInflater = LayoutInflater.from(parent.context)
                 .inflate(R.layout.assign_house_view, parent, false)
 
-        return HouseViewHolder(layoutinflater)
+        return HouseViewHolder(layoutInflater)
     }
 
     // Replace the contents of a view (invoked by the layout manager)

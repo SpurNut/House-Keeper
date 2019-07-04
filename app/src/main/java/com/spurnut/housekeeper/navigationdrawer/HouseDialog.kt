@@ -15,10 +15,11 @@ import com.spurnut.housekeeper.tasksscreen.Callback
 
 class HouseDialog : DialogFragment(), Callback<String, House> {
     override fun callbackCall(data: Map<String, House>) {
-        if (data.contains("edit")) {
-            val dialogFragment = AddEditHouseDialog.newInstance(data["edit"])
+        if (data.contains(context!!.getString(R.string.access_edit))) {
+            val dialogFragment = AddEditHouseDialog.newInstance(
+                    data[context!!.getString(R.string.access_edit)])
             if (fragmentManager != null) {
-                dialogFragment.show(fragmentManager!!, "Dialog");
+                dialogFragment.show(fragmentManager!!, context!!.getString(R.string.dialog));
             }
         }
     }
@@ -44,12 +45,5 @@ class HouseDialog : DialogFragment(), Callback<String, House> {
             houses?.let { viewAdapter.setHouses(it) }
         })
         return view
-    }
-
-    override fun onResume() {
-//        val dialogHeight = MainActivity.displayMetrics.heightPixels - margin * 2 - MainActivity.StatusBarHeight
-//        val dialogWidth = MainActivity.displayMetrics.widthPixels - margin * 2
-//        dialog?.window?.setLayout(dialogWidth, dialogHeight)
-        super.onResume()
     }
 }

@@ -50,11 +50,12 @@ class TaskViewAdapter :
                     val taskId = tasks[this.adapterPosition].id
                     val intent = Intent(v.context, TaskDetailActivity::class.java)
 
-                    intent.putExtra("TASK_ID", taskId)
+                    intent.putExtra(mContext!!.getString(R.string.task_id_detail_activity), taskId)
                     v.context.startActivity(intent)
                 }
                 R.id.button_complete -> {
-                    callback!!.callbackCall(createCallbackData("complete", tasks[this.adapterPosition]))
+                    callback!!.callbackCall(createCallbackData(
+                            mContext!!.getString(R.string.complete), tasks[this.adapterPosition]))
                 }
             }
         }
@@ -161,7 +162,6 @@ class TaskViewAdapter :
                             holder.item.task_description.setLines(2)
                             holder.item.showMoreToggle.visibility = View.VISIBLE
                         }
-                        Log.d(TAG, "Number of lines is $linecount")
                         return true
                     }
                 })

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="house_keeper_database">House_Keeper_database</string>
+    <string name="access_revive">revive</string>
+    <string name="access_edit">edit</string>
+    <string name="dialog">Dialog</string>
+    <string name="house_intent_extra">house</string>
+    <string name="task_title_intent_extra">taskTitle</string>
+    <string name="channelId">13</string>
+    <string name="taskId">taskId</string>
+    <string name="taskTitle">taskTitle</string>
+    <string name="task_id_detail_activity">TASK_ID</string>
+    <string name="access_android_resource">android.resource://</string>
+    <string name="access_chime">/raw/hykenfreak__notification_chime.mp3</string>
+    <string name="channel_name">Task Reminder Channel</string>
+    <string name="channel_description">Notification Channel for reminding on doing tasks</string>
+    <string name="access_assign">assign</string>
+    <string name="access_completed">completed</string>
+    <string name="activity_cant_be_null">Activity cannot be null</string>
+    <string name="task_from_text">TASK_FROM_TEXT</string>
+    <string name="completed">completed</string>
+    <string name="access_complete">complete</string>
+    <string name="remove">remove</string>
+    <string name="add">add</string>
+    <string name="start_camera">START_CAMERA</string>
+    <string name="edit_existing_task">edit_existing_task</string>
+    <string name="access_house">house</string>
+    <string name="access_task_title">taskTitle</string>
+    <string name="date_format">yyyyMMdd_HHmmss</string>
+    <string name="user_config">user_config</string>
+    <string name="error_map">empty map</string>
+    <string name="long_month_pattern">MMMM</string>
+    <string name="short_month_pattern">MMM</string>
+    <string name="weekday_long">EEEE</string>
+    <string name="weekday_short">EE</string>
+    <string name="kotlin_debugging">kotlinx.coroutines.debug</string>
+    <string name="access_on">on</string>
+    <string name="access_off">off</string>
+</resources>

@@ -125,15 +125,15 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         when (item.itemId) {
             R.id.nav_add_house -> {
                 val dialogFragment = AddEditHouseDialog.newInstance(null)
-                dialogFragment.show(supportFragmentManager, "Dialog")
+                dialogFragment.show(supportFragmentManager, getString(R.string.dialog))
             }
             R.id.nav_edit_houses -> {
                 val dialogFragment = HouseDialog()
-                dialogFragment.show(supportFragmentManager, "Dialog")
+                dialogFragment.show(supportFragmentManager, getString(R.string.dialog))
             }
             R.id.nav_archive -> {
                 val dialogFragment = ArchiveDialog()
-                dialogFragment.show(supportFragmentManager, "Dialog")
+                dialogFragment.show(supportFragmentManager, getString(R.string.dialog))
             }
         }
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)

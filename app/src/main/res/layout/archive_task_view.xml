@@ -8,8 +8,8 @@
         android:id="@+id/archived_divider_top"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginLeft="18dp"
-        android:layout_marginRight="18dp"
+        android:layout_marginLeft="@dimen/dp_18"
+        android:layout_marginRight="@dimen/dp_18"
         android:background="?android:attr/listDivider" />
 
     <TextView
@@ -18,9 +18,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/archived_divider_top"
         android:layout_alignStart="@+id/archived_divider_top"
-        android:layout_marginTop="11dp"
+        android:layout_marginTop="@dimen/dp_11"
         android:layout_toStartOf="@+id/button_revive"
-        android:textSize="21sp"
+        android:textSize="@dimen/sp_21"
         android:textStyle="bold" />
 
     <Button
@@ -29,11 +29,11 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/archived_divider_top"
         android:layout_alignEnd="@+id/archived_divider_top"
-        android:layout_marginTop="8dp"
-        android:minWidth="86dp"
-        android:minHeight="0dp"
+        android:layout_marginTop="@dimen/dp_8"
+        android:minWidth="@dimen/dp_86"
+        android:minHeight="@dimen/dp_0"
         android:text="@string/revive"
-        android:textSize="12sp" />
+        android:textSize="@dimen/sp_12" />
 
     <TextView
         android:id="@+id/archived_task_due_date"
@@ -41,20 +41,20 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/archived_task_title"
         android:layout_alignStart="@+id/archived_divider_top"
-        android:layout_marginTop="56dp"
-        android:textSize="12sp"
+        android:layout_marginTop="@dimen/dp_56"
+        android:textSize="@dimen/sp_12"
         android:textStyle="bold" />
 
     <View
         android:id="@+id/archived_divider_bottom"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="@dimen/dp_1"
         android:layout_below="@+id/archived_task_due_date"
-        android:layout_marginLeft="18dp"
-        android:layout_marginRight="18dp"
+        android:layout_marginLeft="@dimen/dp_18"
+        android:layout_marginRight="@dimen/dp_18"
         android:background="?android:attr/listDivider"
         android:fadingEdge="vertical"
-        android:fadingEdgeLength="50dp" />
+        android:fadingEdgeLength="@dimen/dp_50" />
 
 
 </RelativeLayout>

@@ -9,8 +9,8 @@
         android:id="@+id/divider_top"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginLeft="18dp"
-        android:layout_marginRight="18dp"
+        android:layout_marginLeft="@dimen/dp_18"
+        android:layout_marginRight="@dimen/dp_18"
         android:background="?android:attr/listDivider" />
 
     <TextView
@@ -19,18 +19,18 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/divider_top"
         android:layout_alignStart="@+id/divider_top"
-        android:layout_marginTop="11dp"
+        android:layout_marginTop="@dimen/dp_11"
         android:layout_toStartOf="@+id/button_open"
         android:textSize="21sp"
         android:textStyle="bold" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_open"
-        android:layout_width="110dp"
+        android:layout_width="@dimen/dp_110"
         android:layout_height="wrap_content"
         android:layout_below="@+id/divider_top"
         android:layout_alignEnd="@+id/divider_top"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="@dimen/dp_8"
         android:layout_marginRight="-3dp"
         android:text="@string/open"
         android:textSize="12sp" />
@@ -43,7 +43,7 @@
         android:layout_alignEnd="@+id/divider_top"
         android:layout_marginRight="-3dp"
         android:text="@string/complete"
-        android:textSize="12sp" />
+        android:textSize="@dimen/sp_12" />
 
     <TextView
         android:id="@+id/task_assigned_house"
@@ -51,29 +51,29 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/task_title"
         android:layout_alignStart="@+id/divider_top"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="@dimen/dp_8"
         android:textSize="14sp" />
 
     <ImageView
         android:id="@+id/task_reminder_icon"
-        android:layout_width="18dp"
-        android:layout_height="18dp"
+        android:layout_width="@dimen/dp_18"
+        android:layout_height="@dimen/dp_18"
         android:layout_alignStart="@+id/divider_top"
         android:layout_below="@+id/task_assigned_house"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="0dp"
-        android:layout_marginBottom="22dp"
-        android:paddingTop="0dp"
+        android:layout_marginTop="@dimen/dp_12"
+        android:layout_marginEnd="@dimen/dp_0"
+        android:layout_marginBottom="@dimen/dp_2"
+        android:paddingTop="@dimen/dp_0"
         android:src="@drawable/ic_alarm_black_24dp" />
 
     <TextView
         android:id="@+id/task_reminder"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:layout_marginBottom="22dp"
-        android:layout_marginEnd="200dp"
-        android:textSize="14sp"
+        android:layout_marginTop="@dimen/dp_12"
+        android:layout_marginBottom="@dimen/dp_22"
+        android:layout_marginEnd="@dimen/dp_200"
+        android:textSize="@dimen/sp_14"
         android:layout_toEndOf="@+id/task_reminder_icon"
     android:layout_below="@+id/task_assigned_house"/>
 
@@ -82,12 +82,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/task_reminder"
-        android:layout_marginLeft="18dp"
-        android:layout_marginTop="18dp"
-        android:layout_marginRight="18dp"
-        android:layout_marginBottom="4dp"
+        android:layout_marginLeft="@dimen/dp_18"
+        android:layout_marginTop="@dimen/dp_18"
+        android:layout_marginRight="@dimen/dp_18"
+        android:layout_marginBottom="@dimen/dp_18"
 
-        android:textSize="14sp" />
+        android:textSize="@dimen/sp_14" />
 
     <ToggleButton
         android:id="@+id/showMoreToggle"
@@ -95,10 +95,10 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/task_description"
         android:layout_alignEnd="@+id/divider_bottom"
-        android:layout_marginStart="18dp"
+        android:layout_marginStart="@dimen/dp_18"
         android:background="?android:attr/selectableItemBackground"
-        android:minWidth="0dp"
-        android:minHeight="0dp"
+        android:minWidth="@dimen/dp_0"
+        android:minHeight="@dimen/dp_0"
         android:textColor="@color/colorPrimary"
         android:textOff="@string/more"
         android:textOn="@string/less"
@@ -107,13 +107,13 @@
     <View
         android:id="@+id/divider_bottom"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="@dimen/dp_1"
         android:layout_below="@+id/showMoreToggle"
-        android:layout_marginLeft="18dp"
-        android:layout_marginRight="18dp"
+        android:layout_marginLeft="@dimen/dp_18"
+        android:layout_marginRight="@dimen/dp_18"
         android:background="?android:attr/listDivider"
         android:fadingEdge="vertical"
-        android:fadingEdgeLength="50dp" />
+        android:fadingEdgeLength="@dimen/dp_50" />
 
 
 </RelativeLayout>

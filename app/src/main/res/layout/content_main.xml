@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:layout_editor_absoluteX="0dp">
+        tools:layout_editor_absoluteX="@dimen/dp_0">
 
 
     </FrameLayout>
@@ -25,7 +25,7 @@
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_nav"
         android:layout_width="match_parent"
-        android:layout_height="47dp"
+        android:layout_height="@dimen/dp_47"
         android:background="@android:color/white"
         android:layout_gravity="bottom"
         app:menu="@menu/bottom_nav"

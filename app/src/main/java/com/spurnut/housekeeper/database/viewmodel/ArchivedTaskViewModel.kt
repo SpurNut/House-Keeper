@@ -38,7 +38,6 @@ class ArchivedTaskViewModel(application: Application) : AndroidViewModel(applica
                         val filePath = archived.uid
                         val file = File(filePath)
                         val deleted = file.delete()
-                        Log.i("Delete Attempt:", "$filePath deleted: $deleted")
                     }
                 }
                 repository.deleteAllArchived()

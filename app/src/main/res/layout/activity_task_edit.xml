@@ -11,12 +11,12 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view_edit_image"
             android:layout_width="match_parent"
-            android:layout_height="185dp" />
+            android:layout_height="@dimen/dp_185" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/text_input_title"
             android:layout_width="match_parent"
-            android:layout_height="63dp"
+            android:layout_height="@dimen/dp_63"
             android:layout_below="@+id/recycler_view_edit_image"
             android:background="@android:color/white"
             android:hint="@string/task_title"
@@ -33,7 +33,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/editTextDescription"
             android:layout_width="match_parent"
-            android:layout_height="320dp"
+            android:layout_height="@dimen/dp_320"
             android:layout_below="@+id/text_input_title"
             android:hint="@string/description"
             android:background="@android:color/white">
@@ -41,7 +41,7 @@
             <com.google.android.material.textfield.TextInputEditText
 
                 android:layout_width="match_parent"
-                android:layout_height="320dp"
+                android:layout_height="@dimen/dp_320"
                 android:background="@android:color/white"
                 android:gravity="start|top"
                 android:inputType="textMultiLine"
@@ -51,7 +51,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="160dp"
+            android:layout_height="@dimen/dp_160"
             android:layout_below="@id/editTextDescription"
             android:layout_centerHorizontal="true">
 
@@ -60,9 +60,9 @@
                 style="@style/Widget.MaterialComponents.Button.TextButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingRight="20dp"
+                android:paddingRight="@dimen/dp_20"
                 android:text="@string/assign_house"
-                android:textSize="12sp" />
+                android:textSize="@dimen/sp_12" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/button_set_reminder"
@@ -71,7 +71,7 @@
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@+id/button_assign_house"
                 android:text="@string/reminder"
-                android:textSize="12sp" />
+                android:textSize="@dimen/sp_12" />
         </RelativeLayout>
 
     </RelativeLayout>

@@ -21,13 +21,13 @@ class ReminderReceiver : BroadcastReceiver() {
 
         val house = intent?.getStringExtra(context.getString(R.string.house_intent_extra))
         val taskTitle = intent?.getStringExtra(context.getString(R.string.task_title_intent_extra))
-        val taskId = intent?.getIntExtra("taskId",0)
+        val taskId = intent?.getIntExtra(context.getString(R.string.taskId), 0)
 
         createNotificationChannel(context)
 
         val manager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
-        val builder = NotificationCompat.Builder(context,context.getString(R.string.channelId))
+        val builder = NotificationCompat.Builder(context, context.getString(R.string.channelId))
                 .setSmallIcon(R.drawable.ic_alarm_black_24dp)
                 //example for large icon
                 .setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.mipmap.ic_launcher))
@@ -38,7 +38,7 @@ class ReminderReceiver : BroadcastReceiver() {
                 .setPriority(NotificationCompat.VISIBILITY_PUBLIC)
                 .setAutoCancel(true)
         val opening_intent = Intent(context, TaskDetailActivity::class.java)
-        opening_intent.putExtra("TASK_ID", taskId)
+        opening_intent.putExtra(context.getString(R.string.task_id_detail_activity), taskId)
         val pendingIntent = PendingIntent.getActivity(
                 context,
                 taskId!!,
@@ -47,7 +47,9 @@ class ReminderReceiver : BroadcastReceiver() {
         )
         // example for blinking LED
         builder.setLights(-0x48e3e4, 1000, 2000)
-        builder.setSound(Uri.parse("android.resource://" + context.packageName + "/raw/hykenfreak__notification_chime.mp3"))
+        builder.setSound(Uri.parse("android.resource://"
+                + context.packageName
+                + "/raw/hykenfreak__notification_chime.mp3"))
         builder.setContentIntent(pendingIntent)
         manager.notify(taskId, builder.build())
     }
@@ -57,9 +59,9 @@ class ReminderReceiver : BroadcastReceiver() {
         // the NotificationChannel class is new and not in the support library
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 //            val name = context.getString(R.string.channel_name)
-            val name = "Task Reminder Channel"
+            val name = context.getString(R.string.channel_name)
 //            val descriptionText = context.getString(R.string.description_bla)
-            val descriptionText = "Nofification Channel for reminding on doing tasks"
+            val descriptionText = context.getString(R.string.channel_description)
             val importance = NotificationManager.IMPORTANCE_HIGH
             val channel = NotificationChannel(context.getString(R.string.channelId), name, importance).apply {
                 description = descriptionText
