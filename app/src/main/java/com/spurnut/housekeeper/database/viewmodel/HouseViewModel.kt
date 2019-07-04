@@ -1,6 +1,7 @@
 package com.spurnut.housekeeper.database.viewmodel
 
 import android.app.Application
+import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
@@ -26,7 +27,11 @@ class HouseViewModel (application: Application) : AndroidViewModel(application),
     }
 
     fun delete(house: House) = viewModelScope.launch {
-        repository.delete(house)
+        try {
+            repository.delete(house)
+        } catch (exception: android.database.sqlite.SQLiteConstraintException) {
+            //Todo show user that this house is used by tasks and therefore can not be deleted
+        }
     }
 
 }
